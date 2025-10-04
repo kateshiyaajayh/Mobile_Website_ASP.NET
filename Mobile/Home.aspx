@@ -621,8 +621,7 @@
                     <p><b>Battery:</b> <%# Eval("BatteryCapacity") %> mAh</p>
                     <p><b>OS:</b> <%# Eval("OS") %></p>
                      <asp:Button ID="cmd_view" runat="server" Text="View Details" CssClass="btn btn-main" CommandArgument='<%# Eval("Id") %>' CommandName="cmd_view" />
-                    <asp:Button ID="btnAddCart" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-main" />
-                    <asp:Button ID="btnBuy" runat="server" Text="Buy Now" CommandName="BuyNow" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-main" />
+                    <asp:Button ID="cmd_cart" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-main" />
                 </div>
             </ItemTemplate>
         </asp:Repeater>
@@ -706,6 +705,7 @@
 <asp:Content ID="Content8" runat="server" contentplaceholderid="ContentPlaceHolder2">
     <body>
                     <!-- Header -->
+
                     <header>
                         <div class="nav-container">
                             <div class="nav-main">
@@ -724,10 +724,20 @@
                                 </ul>
                             </div>
                           <div class="nav-right">
-    <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search products...">
-    </div>
+   <div class="search-bar">
+    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search products..."></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+</div>
+
+<asp:Repeater ID="Repeater1" runat="server">
+    <ItemTemplate>
+        <!-- product display here (already hase) -->
+        <div>
+            <%# Eval("Brand") %> - <%# Eval("ModelName") %> - <%# Eval("Price") %>
+        </div>
+    </ItemTemplate>
+</asp:Repeater>
+
 
     <div class="auth-buttons">  
         <a href="login.aspx" class="btn btn-register">Login</a> 
@@ -735,7 +745,7 @@
     </div>
 
     <div class="cart-icon">
-        <a href="cart.html">
+        <a href="contact.aspx">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
         </a>

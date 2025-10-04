@@ -417,7 +417,7 @@
                                     <a href="login.aspx" class="btn btn-register">Login</a> <a href="Register.aspx" class="btn btn-register">Register</a>
                                 </div>
                                 <div class="cart-icon">
-                                    <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
+                                    <a href="contact.aspx"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
                                 </div>
                             </div>
         </header>
@@ -516,4 +516,56 @@
                     document.head.appendChild(style);
                 </script>
 </asp:Content>
+
+<asp:Content ID="Content7" runat="server" contentplaceholderid="ContentPlaceHolder3">
+                <!-- Footer -->
+              
+
+                <script>
+                    // Mobile menu functionality
+                    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+                    const navLinks = document.querySelector('.nav-links');
+
+                    mobileMenuBtn.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+
+                        if (navLinks.classList.contains('active')) {
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        } else {
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    });
+
+                    // Add to cart animation
+                    const cartIcon = document.querySelector('.cart-icon');
+                    const cartCount = document.querySelector('.cart-count');
+                    let count = 3;
+
+                    cartIcon.addEventListener('click', () => {
+                        count++;
+                        cartCount.textContent = count;
+
+                        // Animation effect
+                        cartIcon.classList.add('animate');
+                        setTimeout(() => {
+                            cartIcon.classList.remove('animate');
+                        }, 500);
+                    });
+
+                    // Add animation class to CSS
+                    const style = document.createElement('style');
+                    style.textContent = `
+            .cart-icon.animate {
+                animation: bounce 0.5s;
+            }
+            
+            @keyframes bounce {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+            }
+        `;
+                    document.head.appendChild(style);
+                </script>
+</asp:Content>
+
 

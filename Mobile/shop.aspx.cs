@@ -84,6 +84,41 @@ namespace Mobile
                 
             }
         }
+        private void BindProducts(string keyword = "")
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "SELECT * FROM Mobiles";
+
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    query += " WHERE " +
+                             "CAST(Id AS NVARCHAR) LIKE @keyword OR " +
+                             "Brand LIKE @keyword OR " +
+                             "ModelName LIKE @keyword OR " +
+                             "Color LIKE @keyword OR " +
+                             "Storage LIKE @keyword OR " +
+                             "RAM LIKE @keyword OR " +
+                             "BatteryCapacity LIKE @keyword";
+                }
+
+                query += " ORDER BY NEWID()";
+
+                da = new SqlDataAdapter(query, con);
+                da.SelectCommand.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+                ds = new DataSet();
+                da.Fill(ds);
+
+                rptProducts.DataSource = ds;
+                rptProducts.DataBind();
+            }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+            BindProducts(keyword);
+        }
 
     }
 

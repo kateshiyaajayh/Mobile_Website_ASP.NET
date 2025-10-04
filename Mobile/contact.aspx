@@ -414,26 +414,12 @@
                         <a href="login.aspx" class="btn btn-register">Login</a> <a href="Register.aspx" class="btn btn-register">Register</a>
                     </div>
                     <div class="cart-icon">
-                        <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
+                        <a href="contact.aspx"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
                     </div>
                 </div>
         </header>
 
-       <asp:GridView ID="gvCart" runat="server" AutoGenerateColumns="False" OnRowUpdating="gvCart_RowUpdating" OnRowDeleting="gvCart_RowDeleting" OnSelectedIndexChanged="gvCart_SelectedIndexChanged">
-    <Columns>
-        <asp:BoundField DataField="Brand" HeaderText="Brand" ReadOnly="True" />
-        <asp:BoundField DataField="ModelName" HeaderText="Model" ReadOnly="True" />
-        <asp:BoundField DataField="Price" HeaderText="Price" ReadOnly="True" DataFormatString="{0:C}" />
-        <asp:TemplateField HeaderText="Quantity">
-            <ItemTemplate>
-                <asp:TextBox ID="txtQty" runat="server" Text='<%# Bind("Quantity") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
-        <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
-    </Columns>
-</asp:GridView>
-
-<asp:Label ID="lblTotal" runat="server" Text=""></asp:Label>
+    
 
         <br />
         <br />

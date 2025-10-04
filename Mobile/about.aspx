@@ -718,7 +718,7 @@
     </div>
 
     <div class="cart-icon">
-        <a href="cart.html">
+        <a href="contact.aspx">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
         </a>
