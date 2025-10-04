@@ -422,15 +422,29 @@
                             </div>
         </header>
 
- <asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="SvCart_RowCommand">
+<asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" 
+    OnRowCommand="SvCart_RowCommand" OnRowDataBound="SvCart_RowDataBound" 
+    ShowFooter="True" DataKeyNames="Prod_Cart_Id">
     <Columns>
-        <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod_Cart_Id" />
+        <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod_Cart_Id" ReadOnly="True" />
         <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
         <asp:BoundField DataField="Prod_Quantity" HeaderText="Prod_Quantity" />
-        <asp:BoundField DataField="Prod_Price" HeaderText="Product Price" />
-       <asp:ImageField DataImageUrlField="img" HeaderText="Image">
-    <ControlStyle Width="100px" Height="100px" />
-</asp:ImageField>
+        <asp:BoundField DataField="Prod_Price" HeaderText="Product Price" DataFormatString="{0:C}" />
+        <asp:ImageField DataImageUrlField="img" HeaderText="Image">
+            <ControlStyle Width="100px" Height="100px" />
+        </asp:ImageField>
+        <asp:TemplateField HeaderText="Subtotal">
+            <ItemTemplate>
+                <%# Convert.ToDecimal(Eval("Prod_Price")) * Convert.ToInt32(Eval("Prod_Quantity")) %>
+            </ItemTemplate>
+            <FooterTemplate>
+                Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
+            </FooterTemplate>
+        </asp:TemplateField>
+        <asp:ButtonField CommandName="Edit" Text="Edit" ButtonType="Button" />
+        <asp:ButtonField CommandName="Delete" Text="Delete" ButtonType="Button" />
+    </Columns>
+</asp:GridView>
 
        
     </Columns>

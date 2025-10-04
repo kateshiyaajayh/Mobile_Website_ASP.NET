@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Mobile
@@ -61,9 +62,32 @@ namespace Mobile
 
         }
 
+        
+        decimal totalAmount = 0;
+
+        protected void SvCart_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                decimal price = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Prod_Price"));
+                int qty = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Prod_Quantity"));
+                decimal subtotal = price * qty;
+                totalAmount += subtotal;
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                Label lblTotal = (Label)e.Row.FindControl("lblTotal");
+                if (lblTotal != null)
+                {
+                    lblTotal.Text = totalAmount.ToString("C");
+                }
+            }
+        }
+
         protected void SvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
+          
         }
+
     }
 }
