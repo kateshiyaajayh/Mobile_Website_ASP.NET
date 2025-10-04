@@ -422,16 +422,20 @@
                             </div>
         </header>
 
-  <asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="SvCart_RowCommand">
+ <asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" OnRowCommand="SvCart_RowCommand">
     <Columns>
         <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod_Cart_Id" />
         <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
         <asp:BoundField DataField="Prod_Quantity" HeaderText="Prod_Quantity" />
         <asp:BoundField DataField="Prod_Price" HeaderText="Product Price" />
-        <asp:ImageField DataImageUrlField="img" DataImageUrlFormatString="~/images/{0}" HeaderText="Image" ControlStyle-Width="100px" ControlStyle-Height="100px" />
+       <asp:ImageField DataImageUrlField="img" HeaderText="Image">
+    <ControlStyle Width="100px" Height="100px" />
+</asp:ImageField>
 
-  </Columns>
+       
+    </Columns>
 </asp:GridView>
+
 
                 <!-- Footer -->
                 <footer>

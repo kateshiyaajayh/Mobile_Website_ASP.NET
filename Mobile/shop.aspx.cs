@@ -12,7 +12,6 @@ namespace Mobile
         string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
         DataSet ds;
-        SqlDataReader da;
         SqlCommand cmd;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,6 +31,7 @@ namespace Mobile
             con = new SqlConnection(s);
             con.Open();
         }
+
         private void fill()
         {
             getcon();
@@ -41,11 +41,9 @@ namespace Mobile
             da.Fill(dt);
             rptMobiles.DataSource = dt;
             rptMobiles.DataBind();
+            con.Close();
         }
-        void imgupload()
-        {
-           
-        }
+
         protected void drpFilterBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
             fill();
@@ -60,67 +58,29 @@ namespace Mobile
             }
             else if (e.CommandName == "cmd_cart")
             {
-                
-                    getcon();
-                    SqlDataAdapter da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"] + "'", con);
-                    ds = new DataSet();
-                    da.Fill(ds);
-                    int userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+                getcon();
 
-                    int prodid = Convert.ToInt32(e.CommandArgument);
-                    da = new SqlDataAdapter("select * from Mobiles where Id='" + prodid + "'", con);
-                    ds = new DataSet();
-                    da.Fill(ds);
+                SqlDataAdapter da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"].ToString() + "'", con);
+                ds = new DataSet();
+                da.Fill(ds);
+                int userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
 
-                    string prodname = ds.Tables[0].Rows[0][2].ToString();
-                    string prodprc = ds.Tables[0].Rows[0][4].ToString();
-                    string img = ds.Tables[0].Rows[0][5].ToString();
-                    int quantity = 1;
-
-                    cmd = new SqlCommand("insert into Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) values ('" + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
-                    cmd.ExecuteNonQuery();
-                Response.Redirect("Cart.aspx");
-               
-                
-            }
-        }
-        private void BindProducts(string keyword = "")
-        {
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                string query = "SELECT * FROM Mobiles";
-
-                if (!string.IsNullOrEmpty(keyword))
-                {
-                    query += " WHERE " +
-                             "CAST(Id AS NVARCHAR) LIKE @keyword OR " +
-                             "Brand LIKE @keyword OR " +
-                             "ModelName LIKE @keyword OR " +
-                             "Color LIKE @keyword OR " +
-                             "Storage LIKE @keyword OR " +
-                             "RAM LIKE @keyword OR " +
-                             "BatteryCapacity LIKE @keyword";
-                }
-
-                query += " ORDER BY NEWID()";
-
-                da = new SqlDataAdapter(query, con);
-                da.SelectCommand.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+                int prodid = Convert.ToInt32(e.CommandArgument);
+                da = new SqlDataAdapter("select * from Mobiles where Id='" + prodid + "'", con);
                 ds = new DataSet();
                 da.Fill(ds);
 
-                rptProducts.DataSource = ds;
-                rptProducts.DataBind();
+                string prodname = ds.Tables[0].Rows[0]["ModelName"].ToString();
+                string prodprc = ds.Tables[0].Rows[0]["Price"].ToString();
+                string img = ds.Tables[0].Rows[0]["ImagePath"].ToString();  
+                int quantity = 1;
+
+                cmd = new SqlCommand("insert into Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) values ('"
+                    + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Response.Redirect("Cart.aspx");
             }
         }
-
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            string keyword = txtSearch.Text.Trim();
-            BindProducts(keyword);
-        }
-
     }
-
 }
-    
