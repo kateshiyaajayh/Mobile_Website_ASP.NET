@@ -610,7 +610,7 @@
         <asp:Repeater ID="rptProducts" runat="server" OnItemCommand="rptProducts_ItemCommand">
             <ItemTemplate>
                 <div class="product">
-                            <img src='<%# ResolveUrl(Eval("ImagePath1") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath1").ToString()) ? Eval("ImagePath1").ToString() : "~/images/noimage.png") %>' alt="Image2" style="height: 100px; width: 100px;" /><br />
+                            <img src='<%# ResolveUrl(Eval("ImagePath") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath").ToString()) ? Eval("ImagePath").ToString() : "~/images/noimage.png") %>' alt="Image2" style="height: 100px; width: 100px;" /><br />
                                 <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Brand") %>'></asp:Label><br />
                                 
                     <h4><%# Eval("ModelName") %></h4>
