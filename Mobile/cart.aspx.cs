@@ -39,38 +39,34 @@ namespace Mobile
             ds = new DataSet();
             da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"] + "'", con);
             da.Fill(ds);
-            int Uid = Convert.ToInt16(ds.Tables[0].Rows[0][0]);
-            DataSet cartds = new DataSet();
-            da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Name, Prod_Price,Prod_Quantity, img FROM Cart_tbl WHERE User_Cart_Id=" + Uid, con);
-            da.Fill(cartds);
-            SvCart.DataSource = cartds;
-            SvCart.DataBind();
-
-        }
-        protected void gvcart_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-        }
-        decimal totalAmount = 0;
-
-        protected void SvCart_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (ds.Tables[0].Rows.Count > 0)
             {
-                decimal price = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Prod_Price"));
-                int qty = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Prod_Quantity"));
-                decimal subtotal = price * qty;
-                totalAmount += subtotal;
-            }
-            else if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                Label lblTotal = (Label)e.Row.FindControl("lblTotal");
-                if (lblTotal != null)
+                int Uid = Convert.ToInt16(ds.Tables[0].Rows[0][0]);
+                DataSet cartds = new DataSet();
+                da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img FROM Cart_tbl WHERE User_Cart_Id=" + Uid, con);
+                da.Fill(cartds);
+                SvCart.DataSource = cartds;
+                SvCart.DataBind();
+
+                decimal totalAmount = 0;
+                foreach (DataRow dr in cartds.Tables[0].Rows)
                 {
-                    lblTotal.Text = totalAmount.ToString("C");
+                    if (dr["Prod_Price"] != DBNull.Value && dr["Prod_Quantity"] != DBNull.Value)
+                    {
+                        decimal price = Convert.ToDecimal(dr["Prod_Price"]);
+                        int qty = Convert.ToInt32(dr["Prod_Quantity"]);
+                        totalAmount += price * qty;
+                    }
                 }
+                lblFinalTotal.Text = "totalAmount :" + totalAmount.ToString("0.00");
+            }
+            else
+            {
+                SvCart.DataSource = null;
+                SvCart.DataBind();
+                lblFinalTotal.Text = "Final Total : 0.00";
             }
         }
-
         protected void SvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
           
@@ -87,5 +83,10 @@ namespace Mobile
             fillgrid();
         }
 
+        protected void txtQuantity_TextChanged(object sender, EventArgs e)
+        {
+          
+            
+        }
     }
 }

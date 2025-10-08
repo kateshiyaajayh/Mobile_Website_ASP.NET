@@ -445,9 +445,7 @@
             <ItemTemplate>
                 <%# Convert.ToDecimal(Eval("Prod_Price")) * Convert.ToInt32(Eval("Prod_Quantity")) %>
             </ItemTemplate>
-            <FooterTemplate>
-                Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
-            </FooterTemplate>
+           
         </asp:TemplateField>
         <asp:TemplateField HeaderText="Remove">
             <ItemTemplate>
@@ -458,6 +456,7 @@
         </asp:TemplateField>
     </Columns>
 </asp:GridView>
+        <asp:Label ID="lblFinalTotal" runat="server" Text="Label"></asp:Label>
 
   
 
