@@ -47,16 +47,6 @@ namespace Mobile
             SvCart.DataBind();
 
         }
-
-        protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
-        {
-            if (e.CommandName == "cmd_cart")
-            {
-                int id = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("Cart.aspx?id=" + id);
-            }
-        }
-
         protected void gvcart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
         }
@@ -84,6 +74,17 @@ namespace Mobile
         protected void SvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
           
+        }
+
+        protected void lnkRemove_Click(object sender, EventArgs e)
+        {
+            LinkButton lnkRemove = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)lnkRemove.NamingContainer;
+            string prodCartId = SvCart.DataKeys[row.RowIndex].Value.ToString();
+            getcon();
+            cmd = new SqlCommand("DELETE FROM Cart_tbl WHERE Prod_Cart_Id = '" + prodCartId + "'", con);
+            cmd.ExecuteNonQuery();
+            fillgrid();
         }
 
     }

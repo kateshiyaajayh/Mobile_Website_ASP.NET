@@ -78,7 +78,6 @@ namespace Mobile
                 cmd = new SqlCommand("insert into Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) values ('"
                     + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
                 cmd.ExecuteNonQuery();
-                con.Close();
                 Response.Redirect("Cart.aspx");
             }
         }

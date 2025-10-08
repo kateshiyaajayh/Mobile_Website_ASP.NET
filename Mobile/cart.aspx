@@ -422,13 +422,21 @@
                             </div>
         </header>
 
-<asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" 
+
+        <asp:GridView ID="SvCart" runat="server" AutoGenerateColumns="False" 
     OnRowCommand="SvCart_RowCommand" OnRowDataBound="SvCart_RowDataBound" 
     ShowFooter="True" DataKeyNames="Prod_Cart_Id">
     <Columns>
         <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod_Cart_Id" ReadOnly="True" />
         <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
         <asp:BoundField DataField="Prod_Quantity" HeaderText="Prod_Quantity" />
+       
+        <asp:TemplateField HeaderText="Quantity">
+            <ItemTemplate>
+                <asp:TextBox ID="txtQuantity" runat="server"
+                    Text='<%# Eval("Prod_Quantity") %>' Width="50px"></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
         <asp:BoundField DataField="Prod_Price" HeaderText="Product Price" DataFormatString="{0:C}" />
         <asp:ImageField DataImageUrlField="img" HeaderText="Image">
             <ControlStyle Width="100px" Height="100px" />
@@ -441,15 +449,17 @@
                 Total: <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
             </FooterTemplate>
         </asp:TemplateField>
-        <asp:ButtonField CommandName="Edit" Text="Edit" ButtonType="Button" />
-        <asp:ButtonField CommandName="Delete" Text="Delete" ButtonType="Button" />
+        <asp:TemplateField HeaderText="Remove">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkRemove" runat="server" CommandName="Remove" 
+                    CommandArgument='<%# Eval("Prod_Cart_Id") %>'
+                    Text="Remove" OnClientClick="return confirm('Remove this item?');" OnClick="lnkRemove_Click" />
+            </ItemTemplate>
+        </asp:TemplateField>
     </Columns>
 </asp:GridView>
 
-       
-    </Columns>
-</asp:GridView>
-
+  
 
                 <!-- Footer -->
                 <footer>
