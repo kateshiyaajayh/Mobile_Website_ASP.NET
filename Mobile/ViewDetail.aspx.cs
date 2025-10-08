@@ -54,5 +54,10 @@ namespace Mobile
         {
 
         }
+
+        protected void DataList1_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

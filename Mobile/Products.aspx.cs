@@ -46,6 +46,7 @@ namespace Mobile
            
         }
 
+
         void SaveImages()
         {
             if (FileUpload1.HasFile)
@@ -106,35 +107,32 @@ namespace Mobile
             }
             else if (txtadd.Text == "Update" && ViewState["EditId"] != null)
             {
-                string updateQuery = "UPDATE Mobiles SET Brand='" + drpbrand.SelectedValue +
-                                     "', ModelName='" + txtmodelnm.Text +
-                                     "', Price='" + txtprise.Text +
-                                     "', StockQty='" + txtstok.Text +
-                                     "', RAM='" + drpram.SelectedValue +
-                                     "', Storage='" + drpdtor.SelectedValue +
-                                     "', Color='" + txtcolor.Text +
-                                     "', BatteryCapacity='" + txtbatry.Text +
-                                     "', CameraDetails='" + txtcamdt.Text +
-                                     "', OS='" + drpos.SelectedValue +
-                                     "', Description='" + txtdesc.Text +
-                                     "', LaunchDate='" + txtdate.Text + "'";
-                if (!string.IsNullOrEmpty(imag1))
-                    updateQuery += ", ImagePath='" + imag1 + "'";
-                if (!string.IsNullOrEmpty(imag2))
-                    updateQuery += ", ImagePath1='" + imag2 + "'";
-                if (!string.IsNullOrEmpty(imag3))
-                    updateQuery += ", ImagePath2='" + imag3 + "'";
-                if (!string.IsNullOrEmpty(imag4))
-                    updateQuery += ", ImagePath3='" + imag4 + "'";
-                if (!string.IsNullOrEmpty(imag5))
-                    updateQuery += ", ImagePath4='" + imag5 + "'";
-                updateQuery += " WHERE Id='" + ViewState["EditId"].ToString() + "'";
-                cmd = new SqlCommand(updateQuery, con);
+                cmd = new SqlCommand("UPDATE Mobiles SET " +
+                                     "Brand='" + drpbrand.SelectedValue + "'," +
+                                     "ModelName='" + txtmodelnm.Text + "'," +
+                                     "Price='" + txtprise.Text + "'," +
+                                     "StockQty='" + txtstok.Text + "'," +
+                                     "RAM='" + drpram.SelectedValue + "'," +
+                                     "Storage='" + drpdtor.SelectedValue + "'," +
+                                     "Color='" + txtcolor.Text + "'," +
+                                     "BatteryCapacity='" + txtbatry.Text + "'," +
+                                     "CameraDetails='" + txtcamdt.Text + "'," +
+                                     "OS='" + drpos.SelectedValue + "'," +
+                                     "Description='" + txtdesc.Text + "'," +
+                                     "LaunchDate='" + txtdate.Text + "'," +
+                                     "ImagePath='" + imag1 + "'," +
+                                     "ImagePath1='" + imag2 + "'," +
+                                     "ImagePath2='" + imag3 + "'," +
+                                     "ImagePath3='" + imag4 + "'," +
+                                     "ImagePath4='" + imag5 + "'" +
+                                     " WHERE Id='" + ViewState["EditId"].ToString() + "'", con);
+
                 cmd.ExecuteNonQuery();
 
                 txtadd.Text = "Save";
                 ViewState["EditId"] = null;
             }
+
             fill();
             clen();
         }

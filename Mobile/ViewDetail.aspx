@@ -623,6 +623,7 @@
                             <p>Description:
                                 <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Description") %>'></asp:Label><br />
                             </p>
+
                         </div>
 
                     </div>

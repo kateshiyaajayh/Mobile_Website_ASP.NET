@@ -82,8 +82,11 @@ namespace Mobile
             da.Fill(ds);
             rptProducts.DataSource = ds;
             rptProducts.DataBind();
+
+ 
             
         }
+
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtSearch.Text.Trim();

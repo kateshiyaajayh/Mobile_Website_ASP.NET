@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -67,9 +68,15 @@ namespace Mobile
                 lblFinalTotal.Text = "Final Total : 0.00";
             }
         }
+
+
+        protected void SvCart_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
         protected void SvCart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-          
+
         }
 
         protected void lnkRemove_Click(object sender, EventArgs e)
@@ -85,8 +92,54 @@ namespace Mobile
 
         protected void txtQuantity_TextChanged(object sender, EventArgs e)
         {
-          
-            
+
+
         }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("SELECT * FROM Register WHERE Email='" + Session["Email"] + "'", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                int uid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+
+                foreach (GridViewRow row in SvCart.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        int prodcartid = Convert.ToInt32(SvCart.DataKeys[row.RowIndex].Value);
+                        TextBox txtqty = (TextBox)row.FindControl("txtQuantity");
+
+
+                        int quantity = 1;
+                        if (txtqty != null && !string.IsNullOrWhiteSpace(txtqty.Text))
+                        {
+                            int.TryParse(txtqty.Text, out quantity);
+                            if (quantity < 1) quantity = 1;
+                        }
+
+
+                        // Update query
+                        cmd = new SqlCommand(
+                            "UPDATE Cart_tbl SET Prod_Quantity='" + quantity +
+                            "' WHERE User_Cart_Id='" + uid +
+                            "' AND Prod_Cart_Id='" + prodcartid + "'", con);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Loop પૂરી થયા પછી cart rebind + total calculate
+                fillgrid();
+            }
+        }
+
+
+
+
+
     }
 }

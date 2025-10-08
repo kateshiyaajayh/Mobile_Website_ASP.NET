@@ -431,12 +431,12 @@
         <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
         <asp:BoundField DataField="Prod_Quantity" HeaderText="Prod_Quantity" />
        
-        <asp:TemplateField HeaderText="Quantity">
-            <ItemTemplate>
-                <asp:TextBox ID="txtQuantity" runat="server"
-                    Text='<%# Eval("Prod_Quantity") %>' Width="50px"></asp:TextBox>
-            </ItemTemplate>
-        </asp:TemplateField>
+     <asp:TemplateField HeaderText="Quantity">
+    <ItemTemplate>
+        <asp:TextBox ID="txtQuantity" runat="server" Text='<%# Eval("Prod_Quantity") %>' />
+    </ItemTemplate>
+</asp:TemplateField>
+
         <asp:BoundField DataField="Prod_Price" HeaderText="Product Price" DataFormatString="{0:C}" />
         <asp:ImageField DataImageUrlField="img" HeaderText="Image">
             <ControlStyle Width="100px" Height="100px" />
@@ -457,6 +457,7 @@
     </Columns>
 </asp:GridView>
         <asp:Label ID="lblFinalTotal" runat="server" Text="Label"></asp:Label>
+        <asp:Button ID="Button1" runat="server" Text="Update" OnClick="Button1_Click" />
 
   
 
