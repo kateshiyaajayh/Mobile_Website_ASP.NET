@@ -128,7 +128,7 @@
 
             <div class="input-field">
                 <label>Password</label>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" OnTextChanged="txtPassword_TextChanged" />
             </div>
 
             <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn" OnClick="btnLogin_Click" />
@@ -141,4 +141,4 @@
         </div>
     </form>
 </body>
-</html>
+    </html>

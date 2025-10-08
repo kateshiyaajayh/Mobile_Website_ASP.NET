@@ -59,10 +59,7 @@ namespace Mobile
 
         protected void gvcart_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
         }
-
-        
         decimal totalAmount = 0;
 
         protected void SvCart_RowDataBound(object sender, GridViewRowEventArgs e)

@@ -47,7 +47,10 @@ namespace Mobile
             }
         }
 
-
+        protected void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
 
