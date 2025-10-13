@@ -402,6 +402,8 @@
                         <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
                         <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
                         <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+                                                <li><a href="wishlist.aspx"><i class="fas fa-info-circle"></i>wishlist</a></li>
+
                         <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                     </ul>
                 </div>
@@ -523,6 +525,7 @@
                                     <asp:TextBox ID="txtQty" runat="server" CssClass="qty-box" Text="1"></asp:TextBox><br />
                                     <asp:Button ID="cmd_view" runat="server" Text="View Details" CssClass="btn btn-view" CommandArgument='<%# Eval("Id") %>' CommandName="cmd_view" />
                                     <asp:Button ID="cmd_cart" runat="server" Text="Add to Cart" CssClass="btn btn-cart" CommandArgument='<%# Eval("Id") %>' CommandName="cmd_cart" />
+                                     <asp:Button ID="cmd_wis" runat="server" Text="wishlist" CssClass="btn btn-wish" CommandArgument='<%# Eval("Id") %>' CommandName="cmd_wish" />
 
                                 </div>
                             </div>

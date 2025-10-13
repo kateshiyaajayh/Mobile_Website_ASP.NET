@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Mobile
 {
@@ -19,11 +15,10 @@ namespace Mobile
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (!IsPostBack)
             {
                 fill();
-                BindGrid();
+                ShowTotal();
             }
         }
 
@@ -33,14 +28,6 @@ namespace Mobile
             con.Open();
         }
 
-        private void BindGrid()
-        {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Cart_tbl", con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
-            }
         private void fill()
         {
             getcon();
@@ -50,30 +37,27 @@ namespace Mobile
             da.Fill(dt);
             GridViewOrders.DataSource = dt;
             GridViewOrders.DataBind();
+            
         }
+
         private void ShowTotal()
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["constr"].ConnectionString))
+            using (SqlConnection con = new SqlConnection(s))
             {
-                SqlCommand cmd = new SqlCommand("SELECT SUM(Prod_Quantity) FROM Cart_tbl", con);
                 con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ISNULL(SUM(CAST(Prod_Quantity AS INT)),0) FROM Cart_tbl", con);
                 int totalQuantity = Convert.ToInt32(cmd.ExecuteScalar());
-                con.Close();
-
                 lblTotalQuantity.Text = "Total Quantity: " + totalQuantity.ToString();
 
                 cmd = new SqlCommand("SELECT COUNT(DISTINCT User_Cart_Id) FROM Cart_tbl", con);
-                con.Open();
                 int totalUsers = Convert.ToInt32(cmd.ExecuteScalar());
-                con.Close();
-
                 lblTotalUsers.Text = "Total Users: " + totalUsers.ToString();
+
+                cmd = new SqlCommand("SELECT ISNULL(SUM(CAST(Prod_Price AS DECIMAL) * CAST(Prod_Quantity AS INT)),0) FROM Cart_tbl", con);
+                decimal totalMRP = Convert.ToDecimal(cmd.ExecuteScalar());
+                lblTotalMRP.Text = "Total MRP: ₹ " + totalMRP.ToString("0.00");
+
             }
-        }
-
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
         }
     }
 }

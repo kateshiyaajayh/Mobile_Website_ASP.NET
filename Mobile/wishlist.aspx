@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ViewDetail.aspx.cs" Inherits="Mobile.ViewDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="wishlist.aspx.cs" Inherits="Mobile.wishlist" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -30,7 +30,6 @@
                 --gray: #6c757d;
                 --light-gray: #e9ecef;
             }
-
 
             body {
                 background-color: #f5f7fb;
@@ -383,154 +382,6 @@
                         display: flex;
                     }
             }
-
-            .datalist-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-                padding: 15px;
-                background-color: #f7f9fc;
-                font-family: Arial, sans-serif;
-                color: #222;
-            }
-
-            .datalist-item {
-                display: flex;
-                flex-direction: row;
-                gap: 25px;
-                width: 100%;
-                max-width: 1200px;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-
-            .image-label-group {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 140px;
-                padding: 5px 10px;
-                box-sizing: border-box;
-                border-radius: 8px;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: pointer;
-            }
-
-                .image-label-group:hover {
-                    transform: scale(1.08);
-                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-                    background-color: #fff;
-                }
-
-                .image-label-group img {
-                    height: 100px;
-                    width: 100px;
-                    object-fit: contain;
-                    margin-bottom: 6px;
-                    border-radius: 6px;
-                    border: 1px solid #ddd;
-                    transition: transform 0.3s ease;
-                }
-
-                .image-label-group:hover img {
-                    transform: scale(1.1);
-                    border-color: #007bff;
-                }
-
-                .image-label-group p {
-                    font-size: 13px;
-                    margin: 2px 0;
-                    text-align: left;
-                    width: 100%;
-                    color: #090909;
-                    line-height: 1.3;
-                    transition: color 0.3s ease;
-                }
-
-                .image-label-group:hover p {
-                    color: #007bff;
-                    font-weight: 700;
-                }
-
-            .product-label {
-                font-weight: 600;
-                color: #202124;
-            }
-
-            .datalist-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-                padding: 15px;
-                background-color: #f7f9fc;
-                font-family: Arial, sans-serif;
-                color: #222;
-            }
-
-            .datalist-item {
-                display: flex;
-                flex-direction: row;
-                gap: 25px;
-                width: 100%;
-                max-width: 1200px;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-
-            .image-label-group {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 280px; /* approximately image width + padding */
-                padding: 5px 10px;
-                box-sizing: border-box;
-                border-radius: 8px;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: pointer;
-            }
-
-                .image-label-group:hover {
-                    transform: scale(1.08);
-                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-                    background-color: #fff;
-                }
-
-                .image-label-group img {
-                    height: 250px;
-                    width: 250px;
-                    object-fit: contain;
-                    margin-bottom: 8px;
-                    border-radius: 6px;
-                    border: 1px solid #ddd;
-                    transition: transform 0.3s ease;
-                }
-
-                .image-label-group:hover img {
-                    transform: scale(1.1);
-                    border-color: #007bff;
-                }
-
-                .image-label-group p {
-                    font-size: 14px;
-                    margin: 4px 0;
-                    text-align: left;
-                    width: 100%;
-                    color: #090909;
-                    line-height: 1.3;
-                    transition: color 0.3s ease;
-                }
-
-                .image-label-group:hover p {
-                    color: #007bff;
-                    font-weight: 700;
-                }
-
-            .product-label {
-                font-weight: 600;
-                color: #202124;
-            }
         </style>
     </head>
 </asp:Content>
@@ -538,7 +389,7 @@
     <body>
         <!-- Header -->
         <header>
-            <div class="nav-container">
+            <div class="natainer">
                 <div class="nav-main">
                     <div class="logo">
                         <i class="fas fa-mobile-alt"></i><span>Mobile Junction</span>
@@ -547,13 +398,13 @@
                         <i class="fas fa-bars"></i>
                     </button>
                     <ul class="nav-links">
-                        <li><a href="Home.aspx"><i class="fas fa-home"></i>Home</a></li>
-                        <li><a href="About.aspx"><i class="fas fa-info-circle"></i>About</a></li>
-                        <li><a href="Shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
-                        <li><a href="Cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
-                                                <li><a href="wishlist.aspx"><i class="fas fa-info-circle"></i>wishlist</a></li>
+                        <li><a href="home.aspx"><i class="fas fa-home"></i>Home</a></li>
+                        <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
+                        <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
+                        <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+                        <li><a href="wishlist.aspx"><i class="fas fa-info-circle"></i>wishlist</a></li>
 
-                        <li><a href="Contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
+                        <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                     </ul>
                 </div>
                 <div class="nav-right">
@@ -569,68 +420,94 @@
                     </div>
                 </div>
         </header>
-        <center>
 
+        <!-- Main Content -->
+                 <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        .wishlist-grid {
+            width: 100%;
+        }
+        .wishlist-grid img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #FFEA00;
+        }
+        #lblTotal {
+            display: block;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            color: #FFD700;
+        }
+    </style>
+    <div id="form1" runat="server">
+        <div class="container">
+            <h1>Your Wishlist</h1>
 
-            <asp:DataList ID="DataList1" runat="server" CssClass="datalist-container"
-                OnItemCommand="DataList1_ItemCommand" RepeatColumns="4" RepeatDirection="Horizontal">
-                <ItemTemplate>
-                    <div class="datalist-item">
+            <asp:GridView ID="SvWishlist" runat="server" CssClass="wishlist-grid"
+                AutoGenerateColumns="False" DataKeyNames="Wishlist_Id"
+                OnRowDataBound="SvWishlist_RowDataBound">
+                
+                <Columns>
+                    <asp:TemplateField HeaderText="Image">
+                        <ItemTemplate>
+                            <img src='<%# Eval("img") %>' alt="Product Image" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
-                        <div class="image-label-group">
+                    <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
+                    <asp:BoundField DataField="Prod_Price" HeaderText="Price" DataFormatString="₹{0:N2}" />
+               
+       
+                    <asp:TemplateField HeaderText="Action">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnMoveToCart" runat="server" Text="Move to Cart" CssClass="btn"
+                                OnClick="btnMoveToCart_Click" />
+                            &nbsp;
+                            <asp:LinkButton ID="lnkRemove" runat="server" Text="Remove" CssClass="btn"
+                                OnClick="lnkRemove_Click" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
 
-                            <img src='<%# ResolveUrl(Eval("ImagePath1") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath1").ToString()) ? Eval("ImagePath1").ToString() : "~/images/noimage.png") %>' alt="Image2" style="height: 100px; width: 100px;" /><br />
-                            <p>Brand: 
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Brand") %>'></asp:Label><br />
-                            </p>
-                            </p>Model: 
-                            <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("ModelName") %>'></asp:Label><br />
-                            </p>
-                        </div>
+            <asp:Label ID="lblTotal" runat="server" Text="Total Price : 0.00"></asp:Label>
+        </div>
+    </div>
 
-                        <div class="image-label-group">
-                                                        <img src='<%# ResolveUrl(Eval("ImagePath") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath").ToString()) ? Eval("ImagePath").ToString() : "~/images/noimage.png") %>' alt="Image1" style="height: 100px; width: 100px;" /><br />
-
-                            <p>MRP:<asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Price") %>'></asp:Label><br />
-                            </p>
-                            <p>RAME: 
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("RAM") %>'></asp:Label><br />
-                            </p>
-                        </div>
-
-                        <div class="image-label-group">
-                            <img src='<%# ResolveUrl(Eval("ImagePath2") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath2").ToString()) ? Eval("ImagePath2").ToString() : "~/images/noimage.png") %>' alt="Image3" style="height: 100px; width: 100px;" /><br />
-                            <p>Storage:
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Storage") %>'></asp:Label><br />
-                            </p>
-                            <p>Color:
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Color") %>'></asp:Label><br />
-                            </p>
-                        </div>
-
-                        <div class="image-label-group">
-                            <img src='<%# ResolveUrl(Eval("ImagePath3") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath3").ToString()) ? Eval("ImagePath3").ToString() : "~/images/noimage.png") %>' alt="Image4" style="height: 100px; width: 100px;" /><br />
-                            <p>Battery:  
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("BatteryCapacity") %>'></asp:Label><br />
-                            </p>
-                            <p>Camera Details: 
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("CameraDetails") %>'></asp:Label><br />
-                            </p>
-                        </div>
-
-                        <div class="image-label-group">
-                            <img src='<%# ResolveUrl(Eval("ImagePath4") != DBNull.Value && !string.IsNullOrEmpty(Eval("ImagePath4").ToString()) ? Eval("ImagePath4").ToString() : "~/images/noimage.png") %>' alt="Image5" style="height: 100px; width: 100px;" /><br />
-                            <p>Operating System:<asp:Label CssClass="product-label" runat="server" Text='<%# Eval("OS") %>'></asp:Label><br />
-                            </p>
-                            <p>Description:
-                                <asp:Label CssClass="product-label" runat="server" Text='<%# Eval("Description") %>'></asp:Label><br />
-                            </p>
-
-                        </div>
-
-                    </div>
-                </ItemTemplate>
-            </asp:DataList>
 </asp:Content>
 <asp:Content ID="Content7" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
     <!-- Footer -->
@@ -674,39 +551,39 @@
     </footer>
 
     <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
+          // Mobile menu functionality
+          const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+          const navLinks = document.querySelector('.nav-links');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+          mobileMenuBtn.addEventListener('click', () => {
+              navLinks.classList.toggle('active');
 
-            if (navLinks.classList.contains('active')) {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
+              if (navLinks.classList.contains('active')) {
+                  mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+              } else {
+                  mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+              }
+          });
 
-        // Add to cart animation
-        const cartIcon = document.querySelector('.cart-icon');
-        const cartCount = document.querySelector('.cart-count');
-        let count = 3;
+          // Add to cart animation
+          const cartIcon = document.querySelector('.cart-icon');
+          const cartCount = document.querySelector('.cart-count');
+          let count = 3;
 
-        cartIcon.addEventListener('click', () => {
-            count++;
-            cartCount.textContent = count;
+          cartIcon.addEventListener('click', () => {
+              count++;
+              cartCount.textContent = count;
 
-            // Animation effect
-            cartIcon.classList.add('animate');
-            setTimeout(() => {
-                cartIcon.classList.remove('animate');
-            }, 500);
-        });
+              // Animation effect
+              cartIcon.classList.add('animate');
+              setTimeout(() => {
+                  cartIcon.classList.remove('animate');
+              }, 500);
+          });
 
-        // Add animation class to CSS
-        const style = document.createElement('style');
-        style.textContent = `
+          // Add animation class to CSS
+          const style = document.createElement('style');
+          style.textContent = `
             .cart-icon.animate {
                 animation: bounce 0.5s;
             }
@@ -716,7 +593,7 @@
                 50% { transform: scale(1.2); }
             }
         `;
-        document.head.appendChild(style);
+          document.head.appendChild(style);
     </script>
 </asp:Content>
 

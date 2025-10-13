@@ -88,6 +88,7 @@
     <Content Include="Register.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Settings.aspx" />
+    <Content Include="wishlist.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="ViewDetail.aspx.designer.cs">
       <DependentUpon>ViewDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wishlist.aspx.cs">
+      <DependentUpon>wishlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wishlist.aspx.designer.cs">
+      <DependentUpon>wishlist.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

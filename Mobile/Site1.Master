@@ -415,6 +415,8 @@
                                     <li><a href="#"><i class="fas fa-info-circle"></i>About</a></li>
                                     <li><a href="#"><i class="fas fa-store"></i>Shop</a></li>
                                     <li><a href="#"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+                                                            <li><a href="#"><i class="fas fa-info-circle"></i>wishlist</a></li>
+
                                     <li><a href="#"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>
                             </div>

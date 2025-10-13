@@ -318,6 +318,96 @@
                     grid-template-columns: 1fr;
                 }
             }
+            .cart-dashboard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cart-stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 180px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-value {
+    font-size: 2.2em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Specific color styles for each stat */
+.users-stat .stat-value { color: #4FC3F7; }
+.quantity-stat .stat-value { color: #81C784; }
+.mrp-stat .stat-value { color: #FFB74D; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .cart-stats {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        min-width: 200px;
+    }
+}
+.cart-summary {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.stat-card {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 15px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat-number {
+    font-size: 1.8em;
+    font-weight: bold;
+    display: block;
+}
+
+.stat-title {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 5px;
+}
         </style>
     </head>
 </asp:Content>
@@ -352,39 +442,44 @@
                         <span>Admin User</span>
                     </div>
                 </div>
-                                <asp:Label ID="Label3" runat="server" Text=""></asp:Label><br />
-<asp:Label ID="Label4" runat="server" Text=""></asp:Label>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound">
+                    <asp:GridView ID="GridViewOrders" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered">
     <Columns>
-        <asp:BoundField DataField="CartID" HeaderText="CartID" ReadOnly="True" />
-        <asp:BoundField DataField="User_Cart_Id" HeaderText="User" />
-        <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod ID" />  
+       
+    </Columns>
+</asp:GridView>
+
+<hr />
+<div class="cart-dashboard">
+    <div class="cart-stats">
+        <div class="stat-item users-stat">
+            <span class="stat-value">
+                <asp:Label ID="lblTotalUsers" runat="server" Text="2"></asp:Label>
+            </span>
+            <span class="stat-label">Total Users</span>
+        </div>
         
-    </Columns>
-</asp:GridView>
-               
+        <div class="stat-item quantity-stat">
+            <span class="stat-value">
+                <asp:Label ID="lblTotalQuantity" runat="server" Text="15"></asp:Label>
+            </span>
+            <span class="stat-label">Total Quantity</span>
+        </div>
+        
+        <div class="stat-item mrp-stat">
+            <span class="stat-value">
+                <asp:Label ID="lblTotalMRP" runat="server" Text="₹ 14,35,662.00"></asp:Label>
+            </span>
+            <span class="stat-label">Total MRP</span>
+        </div>
+    </div>
+</div>
+        </div>
 
-
-               
-                                <asp:Label ID="lblTotalQuantity" runat="server" Text=""></asp:Label><br />
-<asp:Label ID="lblTotalUsers" runat="server" Text=""></asp:Label>
-                        <asp:GridView ID="GridViewOrders" runat="server" AutoGenerateColumns="False">
-    <Columns>
-        <asp:BoundField DataField="CartID" HeaderText="CartID" ReadOnly="True" />
-        <asp:BoundField DataField="User_Cart_Id" HeaderText="User" />
-        <asp:BoundField DataField="Prod_Cart_Id" HeaderText="Prod ID" />
-        <asp:BoundField DataField="Prod_Name" HeaderText="Product Name" />
-        <asp:BoundField DataField="Prod_Price" HeaderText="Price" />
-        <asp:BoundField DataField="Prod_Quantity" HeaderText="Quantity" />
-
-    </Columns>
-</asp:GridView>
-                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label><br />
-<asp:Label ID="Label2" runat="server" Text=""></asp:Label>
-            </div>
 
         </div>
-  
+
+
+
 </asp:Content>
 
 <asp:Content ID="Content7" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">

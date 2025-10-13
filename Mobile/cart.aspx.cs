@@ -121,8 +121,6 @@ namespace Mobile
                             if (quantity < 1) quantity = 1;
                         }
 
-
-                        // Update query
                         cmd = new SqlCommand(
                             "UPDATE Cart_tbl SET Prod_Quantity='" + quantity +
                             "' WHERE User_Cart_Id='" + uid +
@@ -132,7 +130,7 @@ namespace Mobile
                     }
                 }
 
-                // Loop પૂરી થયા પછી cart rebind + total calculate
+               
                 fillgrid();
             }
         }

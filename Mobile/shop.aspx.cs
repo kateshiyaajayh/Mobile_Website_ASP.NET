@@ -41,7 +41,7 @@ namespace Mobile
             da.Fill(dt);
             rptMobiles.DataSource = dt;
             rptMobiles.DataBind();
-            con.Close();
+        
         }
 
         protected void drpFilterBrand_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,6 +79,29 @@ namespace Mobile
                     + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
                 cmd.ExecuteNonQuery();
                 Response.Redirect("Cart.aspx");
+            }
+            else if (e.CommandName == "cmd_wish")
+            {
+                getcon();
+                SqlDataAdapter da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"].ToString() + "'", con);
+                ds = new DataSet();
+                da.Fill(ds);
+                int userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+
+                int prodid = Convert.ToInt32(e.CommandArgument);
+                da = new SqlDataAdapter("select * from Mobiles where Id='" + prodid + "'", con);
+                ds = new DataSet();
+                da.Fill(ds);
+
+                string Prod_Name = ds.Tables[0].Rows[0]["ModelName"].ToString();
+                string Prod_Price = ds.Tables[0].Rows[0]["Price"].ToString();
+                string img = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+
+                cmd = new SqlCommand("insert into Wishlist_tbl(User_Id,Prod_Name, Prod_Price, img) values ('"
+                    + userid + "','" + Prod_Name + "','" + Prod_Price + "','" + img + "')", con);
+                cmd.ExecuteNonQuery();
+                Response.Redirect("wishlist.aspx");
+
             }
         }
     }

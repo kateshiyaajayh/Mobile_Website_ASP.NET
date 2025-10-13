@@ -11,43 +11,34 @@ namespace Mobile
 {
 
 
-    public partial class Orders
+    public partial class wishlist
     {
 
         /// <summary>
-        /// GridViewOrders control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewOrders;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl form1;
 
         /// <summary>
-        /// lblTotalUsers control.
+        /// SvWishlist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalUsers;
+        protected global::System.Web.UI.WebControls.GridView SvWishlist;
 
         /// <summary>
-        /// lblTotalQuantity control.
+        /// lblTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalQuantity;
-
-        /// <summary>
-        /// lblTotalMRP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalMRP;
+        protected global::System.Web.UI.WebControls.Label lblTotal;
     }
 }

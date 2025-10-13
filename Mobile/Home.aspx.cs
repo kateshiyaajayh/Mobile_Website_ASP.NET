@@ -43,6 +43,13 @@ namespace Mobile
                 rptProducts.DataBind();
             }
         }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+
+
         protected void rptProducts_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "cmd_view")
@@ -87,11 +94,7 @@ namespace Mobile
             
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            string keyword = txtSearch.Text.Trim();
-            BindProducts(keyword);
-        }
+       
 
     }
 }
