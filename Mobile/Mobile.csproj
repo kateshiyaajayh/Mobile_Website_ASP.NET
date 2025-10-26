@@ -75,11 +75,13 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="cart.aspx" />
+    <Content Include="chek_out.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Orders.aspx" />
+    <Content Include="OrderSuccess.aspx" />
     <Content Include="Products.aspx" />
     <Content Include="shop.aspx" />
     <Content Include="User.aspx" />
@@ -126,6 +128,13 @@
     <Compile Include="cart.aspx.designer.cs">
       <DependentUpon>cart.aspx</DependentUpon>
     </Compile>
+    <Compile Include="chek_out.aspx.cs">
+      <DependentUpon>chek_out.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="chek_out.aspx.designer.cs">
+      <DependentUpon>chek_out.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
@@ -161,6 +170,13 @@
     </Compile>
     <Compile Include="Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderSuccess.aspx.cs">
+      <DependentUpon>OrderSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderSuccess.aspx.designer.cs">
+      <DependentUpon>OrderSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>

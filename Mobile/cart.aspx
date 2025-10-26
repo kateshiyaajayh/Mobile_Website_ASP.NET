@@ -462,6 +462,7 @@
 </asp:GridView>
         <asp:Label ID="lblFinalTotal" runat="server" Text="Label"></asp:Label>
         <asp:Button ID="Button1" runat="server" Text="Update" OnClick="Button1_Click" />
+        <asp:Button ID="btnCheckout" runat="server" Text="Proceed to Checkout" OnClick="btnCheckout_Click" CssClass="btn btn-primary" />
 
   
 
