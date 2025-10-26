@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Adminpenal.Master" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="Mobile.User" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Adminpenal.Master" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="Mobile.User1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content5" runat="server" contentplaceholderid="ContentPlaceHolder1">
@@ -351,7 +351,196 @@
                                 </div>
                             </div>
 
-                         
+                            <!-- Content -->
+                            <div class="content">
+                                <!-- Stats Cards -->
+                                <div class="dashboard-cards">
+                                    <div class="card stat-card users">
+                                        <i class="fas fa-users"></i>
+                                        <div class="number">
+                                            1,258</div>
+                                        <div class="label">
+                                            Total Users</div>
+                                    </div>
+                                    <div class="card stat-card products">
+                                        <i class="fas fa-box"></i>
+                                        <div class="number">
+                                            542</div>
+                                        <div class="label">
+                                            Total Products</div>
+                                    </div>
+                                    <div class="card stat-card orders">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <div class="number">
+                                            789</div>
+                                        <div class="label">
+                                            Total Orders</div>
+                                    </div>
+                                    <div class="card stat-card revenue">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        <div class="number">
+                                            $25,890</div>
+                                        <div class="label">
+                                            Total Revenue</div>
+                                    </div>
+                                </div>
+
+                                <!-- Recent Orders -->
+                                <div class="content-section">
+                                    <h2>Recent Orders</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#ORD-7589</td>
+                                                <td>John Smith</td>
+                                                <td>May 15, 2023</td>
+                                                <td>$125.99</td>
+                                                <td><span class="badge completed">Completed</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ORD-7588</td>
+                                                <td>Emma Johnson</td>
+                                                <td>May 15, 2023</td>
+                                                <td>$89.50</td>
+                                                <td><span class="badge pending">Pending</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ORD-7587</td>
+                                                <td>Michael Brown</td>
+                                                <td>May 14, 2023</td>
+                                                <td>$215.00</td>
+                                                <td><span class="badge processing">Processing</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ORD-7586</td>
+                                                <td>Sarah Williams</td>
+                                                <td>May 14, 2023</td>
+                                                <td>$52.75</td>
+                                                <td><span class="badge completed">Completed</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ORD-7585</td>
+                                                <td>David Miller</td>
+                                                <td>May 13, 2023</td>
+                                                <td>$179.99</td>
+                                                <td><span class="badge pending">Pending</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        View
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- User Management -->
+                                <div class="content-section">
+                                    <h2>User Management</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>User ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#USR-2589</td>
+                                                <td>John Smith</td>
+                                                <td>john@example.com</td>
+                                                <td>Customer</td>
+                                                <td><span class="badge active">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#USR-2588</td>
+                                                <td>Emma Johnson</td>
+                                                <td>emma@example.com</td>
+                                                <td>Admin</td>
+                                                <td><span class="badge active">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#USR-2587</td>
+                                                <td>Michael Brown</td>
+                                                <td>michael@example.com</td>
+                                                <td>Customer</td>
+                                                <td><span class="badge inactive">Inactive</span></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm">
+                                                        Edit
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
         </div>

@@ -11,7 +11,7 @@ namespace Mobile
 {
 
 
-    public partial class User
+    public partial class User1
     {
     }
 }

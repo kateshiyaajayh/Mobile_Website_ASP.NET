@@ -473,11 +473,34 @@
         </div>
     </div>
 </div>
+                       <h2>Orders List</h2>
+
+            <asp:GridView ID="GridView1" runat="server" 
+                AutoGenerateColumns="False" 
+                CssClass="table"
+                DataKeyNames="OrderID"
+                OnRowEditing="GridView1_RowEditing"
+                OnRowCancelingEdit="GridView1_RowCancelingEdit"
+                OnRowUpdating="GridView1_RowUpdating"
+                OnRowDeleting="GridView1_RowDeleting">
+
+                <Columns>
+                    <asp:BoundField DataField="OrderID" HeaderText="Order ID" ReadOnly="True" />
+                    <asp:BoundField DataField="UserID" HeaderText="User ID" ReadOnly="True" />
+                    <asp:BoundField DataField="OrderDate" HeaderText="Order Date" DataFormatString="{0:dd-MM-yyyy HH:mm}" ReadOnly="True" />
+                    <asp:BoundField DataField="TotalAmount" HeaderText="Total Amount" />
+                    <asp:BoundField DataField="Status" HeaderText="Status" />
+                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+                </Columns>
+            </asp:GridView>
+
+            <asp:Label ID="lblMsg" runat="server" CssClass="msg"></asp:Label>
+        </div>
         </div>
 
 
         </div>
-
+       
 
 
 </asp:Content>

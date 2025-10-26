@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Mobile
 {
-    public partial class User : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+	public partial class User1 : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
 
-        }
-    }
+		}
+	}
 }
