@@ -35,6 +35,7 @@
                             color: var(--dark);
                             min-height: 100vh;
                             display: flex;
+                            background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
                             flex-direction: column;
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
@@ -597,12 +598,149 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* 3D Cube + Hero Section */
+.mj-hero {
+
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin: auto;
+  padding: 20px;
+}
+
+@media (max-width: 900px) {
+  .mj-hero {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+  }
+}
+
+/* Cube setup */
+.mj-scene {
+   
+  width: 350px;
+  height: 350px;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mj-cube {
+   
+  width: 220px;
+  height: 220px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: mj-rotate 10s linear infinite;
+}
+
+.mj-face {
+     
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.mj-face img {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.95;
+}
+
+.mj-front  { transform: rotateY(0deg) translateZ(110px); }
+.mj-back   { transform: rotateY(180deg) translateZ(110px); }
+.mj-right  { transform: rotateY(90deg) translateZ(110px); }
+.mj-left   { transform: rotateY(-90deg) translateZ(110px); }
+.mj-top    { transform: rotateX(90deg) translateZ(110px); }
+.mj-bottom { transform: rotateX(-90deg) translateZ(110px); }
+
+@keyframes mj-rotate {
+  0%   { transform: rotateX(-15deg) rotateY(0deg); }
+  100% { transform: rotateX(-15deg) rotateY(360deg); }
+}
+
+.mj-scene:hover .mj-cube {
+  animation-play-state: paused;
+}
+
+.mj-content {
+    margin-left:150px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.mj-content h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: #00bcd4;
+}
+
+.mj-content span {
+  color: white;
+}
+
+.mj-content p {
+  font-size: 17px;
+  color: white;
+  max-width: 480px;
+}
+
+.mj-btn {
+  background: #00bcd4;
+  color: #000;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.mj-btn:hover {
+  background: #0acfe3;
+  transform: translateY(-2px);
+}
 
 </style>
    
-       <img src="product_images/home hero.png" alt="Banner Image" class="responsive-banner" />
+      
+<div class="mj-hero">
+  <div class="mj-scene">
+    <div class="mj-cube">
+      <div class="mj-face mj-front"><img src="images/Home_add.png" alt="Front"></div>
+      <div class="mj-face mj-back"><img src="images/SAMSUNG_S25_ULTRA.png" alt="Back"></div>
+      <div class="mj-face mj-right"><img src="images/Samsung Galaxy Z Flip7.png" alt="Right"></div>
+      <div class="mj-face mj-left"><img src="images/oppo.png" alt="Left"></div>
+      <div class="mj-face mj-top"><img src="product_images/hy.jpg" alt="top"> </div>
+      <div class="mj-face mj-bottom"><img src="product_images/hy.jpg" alt="bottom"></div>
+    </div>
+  </div>
 
-    
+  <div class="mj-content">
+    <h2>Welcome to <span>Mobile Junction</span></h2>
+    <p>Explore our latest mobiles and accessories. Hover the cube to pause rotation.</p>
+      <a href="shop.aspx" class="mj-btn">Shop Now</a>
+  </div>
+</div>
+
      <div id="form1">
       <div class="products">
     <h2>Our Latest Mobiles</h2>
@@ -720,6 +858,8 @@
                                     <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
                                     <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
                                     <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+                                        <li><a href="wishlist.aspx"><i class="fa-solid fa-heart"></i>wishlist</a></li>
+
                                     <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>
                             </div>

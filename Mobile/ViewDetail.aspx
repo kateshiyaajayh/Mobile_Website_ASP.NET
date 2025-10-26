@@ -33,7 +33,8 @@
 
 
             body {
-                background-color: #f5f7fb;
+                       background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+                           
                 color: var(--dark);
                 min-height: 100vh;
                 display: flex;
@@ -206,6 +207,7 @@
 
             /* Footer */
             footer {
+                margin-top:50px;
                 background: var(--dark);
                 color: white;
                 padding: 50px 5% 20px;
@@ -385,12 +387,13 @@
             }
 
             .datalist-container {
+                margin-top:100px;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 20px;
                 padding: 15px;
-                background-color: #f7f9fc;
+               
                 font-family: Arial, sans-serif;
                 color: #222;
             }
@@ -433,10 +436,7 @@
                     transition: transform 0.3s ease;
                 }
 
-                .image-label-group:hover img {
-                    transform: scale(1.1);
-                    border-color: #007bff;
-                }
+                
 
                 .image-label-group p {
                     font-size: 13px;
@@ -464,7 +464,6 @@
                 justify-content: center;
                 gap: 20px;
                 padding: 15px;
-                background-color: #f7f9fc;
                 font-family: Arial, sans-serif;
                 color: #222;
             }
@@ -494,7 +493,7 @@
                 .image-label-group:hover {
                     transform: scale(1.08);
                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-                    background-color: #fff;
+                    
                 }
 
                 .image-label-group img {

@@ -703,7 +703,7 @@
                                     <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
                                     <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
                                     <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
-                                                            <li><a href="wishlist.aspx"><i class="fas fa-info-circle"></i>wishlist</a></li>
+                                                            <li><a href="wishlist.aspx"><i class="fa-solid fa-heart"></i>wishlist</a></li>
 
                                     <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>

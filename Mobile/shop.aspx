@@ -32,7 +32,8 @@
             }
 
             body {
-                background-color: #f5f7fb;
+                 background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+                           
                 color: var(--dark);
                 min-height: 100vh;
                 display: flex;
@@ -402,7 +403,7 @@
                         <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
                         <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
                         <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
-                                                <li><a href="wishlist.aspx"><i class="fas fa-info-circle"></i>wishlist</a></li>
+                                                <li><a href="wishlist.aspx"><i class="fa-solid fa-heart"></i>wishlist</a></li>
 
                         <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                     </ul>
@@ -424,20 +425,7 @@
             <div style="margin: 20px;">
                 <h2 style="text-align: center; font-family: Arial; margin-bottom: 20px;">Mobile Shop</h2>
 
-                <label><b>Select Brand:</b></label>
-                <asp:DropDownList ID="drpFilterBrand" runat="server" AutoPostBack="true"
-                    OnSelectedIndexChanged="drpFilterBrand_SelectedIndexChanged">
-                    <asp:ListItem Value="">--All--</asp:ListItem>
-                    <asp:ListItem>Apple</asp:ListItem>
-                    <asp:ListItem>Samsung</asp:ListItem>
-                    <asp:ListItem>Xiaomi</asp:ListItem>
-                    <asp:ListItem>Google</asp:ListItem>
-                    <asp:ListItem>Oppo</asp:ListItem>
-                    <asp:ListItem>Vivo</asp:ListItem>
-                    <asp:ListItem>Oneplus</asp:ListItem>
-                </asp:DropDownList>
-
-                <hr />
+               
 
                 <style>
                     .mobile-container {
