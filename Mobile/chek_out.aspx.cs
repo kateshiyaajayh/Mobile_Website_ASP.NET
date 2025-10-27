@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+using System.Configuration;
 using System.Web.UI.WebControls;
 
 namespace Mobile
@@ -25,7 +21,6 @@ namespace Mobile
             {
                 Response.Redirect("Register.aspx");
             }
-
             if (!IsPostBack)
             {
                 BindCheckout();
@@ -41,7 +36,6 @@ namespace Mobile
         void BindCheckout()
         {
             getcon();
-
             da = new SqlDataAdapter("SELECT * FROM Register WHERE Email='" + Session["Email"] + "'", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -49,62 +43,156 @@ namespace Mobile
             if (ds.Tables[0].Rows.Count > 0)
             {
                 int uid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-
                 DataSet cartds = new DataSet();
                 da = new SqlDataAdapter("SELECT Prod_Name, Prod_Price, Prod_Quantity, (CAST(Prod_Price AS DECIMAL(10,2)) * CAST(Prod_Quantity AS INT)) AS Subtotal FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
                 da.Fill(cartds);
-
                 GridViewCheckout.DataSource = cartds;
                 GridViewCheckout.DataBind();
-
                 totalAmount = 0;
                 foreach (DataRow dr in cartds.Tables[0].Rows)
                 {
                     totalAmount += Convert.ToDecimal(dr["Subtotal"]);
                 }
                 lblTotal.Text = "Total Amount: ₹ " + totalAmount.ToString("0.00");
+                ViewState["TotalAmount"] = totalAmount;  // Store for postback
             }
-
             con.Close();
+        }
+
+        protected void rblPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Always get current total from ViewState
+            decimal amount = (ViewState["TotalAmount"] != null) ? Convert.ToDecimal(ViewState["TotalAmount"]) : 0;
+
+            pnlCreditCard.Visible = (rblPaymentMethod.SelectedValue == "CreditCard");
+            pnlDebitCard.Visible = (rblPaymentMethod.SelectedValue == "DebitCard");
+            pnlGPay.Visible = (rblPaymentMethod.SelectedValue == "GPay" || rblPaymentMethod.SelectedValue == "CashOnDelivery");
+            pnlAdvance.Visible = (rblPaymentMethod.SelectedValue == "CashOnDelivery");
+            pnlCODSummary.Visible = (rblPaymentMethod.SelectedValue == "CashOnDelivery");
+
+            if (rblPaymentMethod.SelectedValue == "CashOnDelivery")
+            {
+                decimal advance = Math.Round(amount * 0.25M, 2);
+                txtAdvanceAmount.Text = advance.ToString("0.00");
+                lblCODMRP.Text = "₹ " + amount.ToString("0.00");
+                lblCODAdvance.Text = "₹ " + advance.ToString("0.00");
+            }
+            else
+            {
+                txtAdvanceAmount.Text = "";
+                lblCODMRP.Text = "";
+                lblCODAdvance.Text = "";
+            }
+            lblMessage.Text = "";
+            lblSuccess.Text = "";
         }
 
         protected void btnPlaceOrder_Click(object sender, EventArgs e)
         {
+            lblMessage.Text = "";
+            lblSuccess.Text = "";
+
+            // Get total from ViewState every time
+            decimal amount = (ViewState["TotalAmount"] != null) ? Convert.ToDecimal(ViewState["TotalAmount"]) : 0;
+            string payMethod = rblPaymentMethod.SelectedValue;
+
+            // Validation
+            if (payMethod == "CreditCard")
+            {
+                if (string.IsNullOrWhiteSpace(txtCardName.Text) || string.IsNullOrWhiteSpace(txtCardNumber.Text) ||
+                    string.IsNullOrWhiteSpace(txtExpiry.Text) || string.IsNullOrWhiteSpace(txtCVV.Text))
+                {
+                    lblMessage.Text = "Please enter all credit card details!";
+                    return;
+                }
+            }
+            else if (payMethod == "DebitCard")
+            {
+                if (string.IsNullOrWhiteSpace(txtDCardName.Text) || string.IsNullOrWhiteSpace(txtDCardNumber.Text) ||
+                    string.IsNullOrWhiteSpace(txtDExpiry.Text) || string.IsNullOrWhiteSpace(txtDCVV.Text))
+                {
+                    lblMessage.Text = "Please enter all debit card details!";
+                    return;
+                }
+            }
+            else if (payMethod == "GPay" || payMethod == "CashOnDelivery")
+            {
+                if (string.IsNullOrWhiteSpace(txtUPIID.Text) || string.IsNullOrWhiteSpace(txtGPayPhone.Text))
+                {
+                    lblMessage.Text = "Please enter your UPI ID and phone number!";
+                    return;
+                }
+            }
+
             getcon();
 
-            da = new SqlDataAdapter("SELECT * FROM Register WHERE Email='" + Session["Email"] + "'", con);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count > 0)
+            try
             {
-                int uid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-
-                cmd = new SqlCommand("INSERT INTO Orders(UserID, TotalAmount) VALUES(" + uid + ", " + totalAmount + ")", con);
-                cmd.ExecuteNonQuery();
-
-                cmd = new SqlCommand("SELECT MAX(OrderID) FROM Orders", con);
-                int orderId = Convert.ToInt32(cmd.ExecuteScalar());
-
-                da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Quantity, Prod_Price FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
-                DataSet cartds = new DataSet();
-                da.Fill(cartds);
-
-                foreach (DataRow dr in cartds.Tables[0].Rows)
+                da = new SqlDataAdapter("SELECT * FROM Register WHERE Email='" + Session["Email"] + "'", con);
+                ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
                 {
-                    int prodId = Convert.ToInt32(dr["Prod_Cart_Id"]);
-                    int qty = Convert.ToInt32(dr["Prod_Quantity"]);
-                    decimal price = Convert.ToDecimal(dr["Prod_Price"]);
-
-                    cmd = new SqlCommand("INSERT INTO Order_Details(OrderID, MobileID, Quantity, Price) VALUES(" + orderId + "," + prodId + "," + qty + "," + price + ")", con);
+                    int uid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                    cmd = new SqlCommand("INSERT INTO Orders(UserID, TotalAmount) VALUES(" + uid + ", " + amount + ")", con);
                     cmd.ExecuteNonQuery();
+                    cmd = new SqlCommand("SELECT MAX(OrderID) FROM Orders", con);
+                    int orderId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Quantity, Prod_Price FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
+                    DataSet cartds = new DataSet();
+                    da.Fill(cartds);
+
+                    foreach (DataRow dr in cartds.Tables[0].Rows)
+                    {
+                        int prodId = Convert.ToInt32(dr["Prod_Cart_Id"]);
+                        int qty = Convert.ToInt32(dr["Prod_Quantity"]);
+                        decimal price = Convert.ToDecimal(dr["Prod_Price"]);
+                        cmd = new SqlCommand("INSERT INTO Order_Details(OrderID, MobileID, Quantity, Price) VALUES(" + orderId + "," + prodId + "," + qty + "," + price + ")", con);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    if (payMethod == "CashOnDelivery")
+                    {
+                        decimal advAmount = Math.Round(amount * 0.25M, 2);
+                        string transactionId = txtUPIID.Text.Trim();
+                        cmd = new SqlCommand("INSERT INTO PaymentDetails(OrderID, UserID, PaymentMethod, TransactionID, Amount, PaymentStatus, PaymentDate) VALUES("
+                            + orderId + ", " + uid + ", 'Cash On Delivery', '" + transactionId + "', " + advAmount + ", 'Advance Paid', GETDATE())", con);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (payMethod == "CreditCard")
+                    {
+                        cmd = new SqlCommand("INSERT INTO PaymentDetails(OrderID, UserID, PaymentMethod, TransactionID, Amount, PaymentStatus, PaymentDate) VALUES("
+                            + orderId + ", " + uid + ", 'Credit Card', '" + txtCardNumber.Text + "', " + amount + ", 'Success', GETDATE())", con);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (payMethod == "DebitCard")
+                    {
+                        cmd = new SqlCommand("INSERT INTO PaymentDetails(OrderID, UserID, PaymentMethod, TransactionID, Amount, PaymentStatus, PaymentDate) VALUES("
+                            + orderId + ", " + uid + ", 'Debit Card', '" + txtDCardNumber.Text + "', " + amount + ", 'Success', GETDATE())", con);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (payMethod == "GPay")
+                    {
+                        cmd = new SqlCommand("INSERT INTO PaymentDetails(OrderID, UserID, PaymentMethod, TransactionID, Amount, PaymentStatus, PaymentDate) VALUES("
+                            + orderId + ", " + uid + ", 'GPay', '" + txtUPIID.Text + "', " + amount + ", 'Success', GETDATE())", con);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    cmd = new SqlCommand("DELETE FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
+                    cmd.ExecuteNonQuery();
+                    lblSuccess.Text = "Order placed successfully!";
+                    Response.Redirect("OrderSuccess.aspx");
                 }
-
-                cmd = new SqlCommand("DELETE FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
-                cmd.ExecuteNonQuery();
-
-
-                Response.Redirect("OrderSuccess.aspx");
+            }
+            catch (Exception ex)
+            {
+                lblMessage.Text = "Error: " + ex.Message;
+            }
+            finally
+            {
+                if (con != null && con.State == System.Data.ConnectionState.Open)
+                    con.Close();
             }
         }
     }

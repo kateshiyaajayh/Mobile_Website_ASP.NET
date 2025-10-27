@@ -162,6 +162,7 @@
 
         <!-- Main Content -->
         <div class="main-content">
+
             <!-- Header -->
             <div class="admin-header">
                 <h1>Dashboard</h1>
@@ -174,11 +175,31 @@
                 </div>
             </div>
 
-            <!-- Welcome Section -->
-            <div class="dashboard-welcome">
-                <h2>Welcome to your Admin Dashboard!</h2>
-                <p>Use the sidebar to manage Users, Products, Orders, Reports, and Settings.</p>
-            </div>
-        </div>
+        <div id="form1" runat="server">
+        <h2>Payment Details</h2>
+       <asp:GridView ID="GridViewPaymentDetails" runat="server" AutoGenerateColumns="False"
+    CssClass="table table-bordered"
+    DataKeyNames="PaymentID"
+    OnRowEditing="GridViewPaymentDetails_RowEditing"
+    OnRowCancelingEdit="GridViewPaymentDetails_RowCancelingEdit"
+    OnRowUpdating="GridViewPaymentDetails_RowUpdating"
+    OnRowDeleting="GridViewPaymentDetails_RowDeleting">
+    <Columns>
+        <asp:BoundField DataField="PaymentID" HeaderText="Payment ID" ReadOnly="true"/>
+        <asp:BoundField DataField="OrderID" HeaderText="Order ID"/>
+        <asp:BoundField DataField="UserID" HeaderText="User ID"/>
+        <asp:BoundField DataField="PaymentMethod" HeaderText="Payment Method"/>
+        <asp:BoundField DataField="TransactionID" HeaderText="Transaction ID"/>
+        <asp:BoundField DataField="Amount" HeaderText="Amount"/>
+        <asp:BoundField DataField="PaymentStatus" HeaderText="Payment Status"/>
+        <asp:BoundField DataField="PaymentDate" HeaderText="Payment Date"/>
+        <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+    </Columns>
+</asp:GridView>
+
+    </div>
+
+    </div>
+
     </div>
 </asp:Content>
