@@ -121,9 +121,7 @@
                                 padding: 0 10px;
                             }
 
-                                .search-bar input::placeholder {
-                                    color: rgba(255, 255, 255, 0.7);
-                                }
+                             
 
                         .auth-buttons {
                             display: flex;
@@ -307,9 +305,7 @@
                                 margin-right: 20px;
                             }
 
-                            .search-bar input {
-                                width: 150px;
-                            }
+                         
                         }
 
                         @media (max-width: 768px) {
@@ -326,21 +322,7 @@
                         }
 
                         @media (max-width: 576px) {
-                            .nav-right {
-                                flex-wrap: wrap;
-                                justify-content: center;
-                                gap: 10px;
-                            }
-
-                            .search-bar {
-                                order: 2;
-                                width: 100%;
-                                margin-top: 10px;
-                            }
-
-                                .search-bar input {
-                                    width: 100%;
-                                }
+                           
 
                             .auth-buttons {
                                 order: 1;
@@ -714,10 +696,190 @@
   transition: 0.3s ease;
 }
 
-.mj-btn:hover {
-  background: #0acfe3;
-  transform: translateY(-2px);
+       .mj-btn:hover {
+           background: #0acfe3;
+           transform: translateY(-2px);
+       }
+       /* --- NAVIGATION BAR BG FIX --- */
+header {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 15px 5%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
+/* --- NAV RIGHT GROUP FIX --- */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: transparent;
+}
+
+/* --- SEARCHBAR MODERN STYLING --- */
+#TextBox1, 
+.nav-right input[type="text"] {
+    background: #fff !important;
+    border: none !important;
+    outline: none;
+    color: #323c50 !important;
+    padding: 9px 18px;
+    border-radius: 22px;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(80,120,200,0.09);
+    min-width: 170px;
+    margin: 0;
+}
+#TextBox1::placeholder,
+.nav-right input[type="text"]::placeholder {
+    color: #a0aec0;
+    font-weight: 500;
+    opacity: 1;
+    letter-spacing: 0.02em;
+}
+
+/* --- SEARCH BUTTON --- */
+#Button1, .btn-main {
+    background: #fff;
+    color: var(--primary);
+    border: none;
+    border-radius: 22px;
+    padding: 9px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 6px;
+    transition: 
+        background 0.18s,
+        color 0.18s,
+        box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(80,120,250,0.10);
+}
+#Button1:hover, .btn-main:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* --- USER ICON CIRCLE --- */
+.user-icon {
+    width: 36px;
+    height: 36px;
+    background: #10989e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.18rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 1px 8px rgba(30,100,100,0.11);
+    margin-left: 7px;
+}
+.user-icon:hover, .user-icon:focus {
+    box-shadow: 0 6px 18px rgba(20,90,150,0.12);
+}
+
+/* --- DROPDOWN --- */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 160px;
+    background: #fff;
+    padding: 0.7rem 0;
+    box-shadow: 0 7px 16px rgba(40,60,110,0.14);
+    border-radius: 12px;
+    z-index: 99;
+}
+.user-icon:active .dropdown,
+.user-icon:focus-within .dropdown,
+.user-icon.open .dropdown {
+    display: block;
+}
+.dropdown a {
+    display: block;
+    color: #3a3a4c;
+    font-weight: 600;
+    padding: 8px 22px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 7px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown a:hover {
+    background: #e9f3ff;
+    color: #1860a3;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width:850px) {
+    .nav-right {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end;
+    }
+}
+.search-bar {
+   
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 28px;
+    padding: 3px 8px 3px 13px;
+    box-shadow: 0 2px 9px rgba(60,60,140,0.09);
+    min-width: 20px;
+    max-width: 320px;
+    position: relative;
+}
+
+.search-bar .search-input,
+#TextBox1 {
+    
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #374151;
+    font-size: 1.08rem;
+    padding: 9px 6px 9px 2px;
+    flex: 1 1 auto;
+    width: 100px;
+}
+
+.search-bar .search-input::placeholder,
+#TextBox1::placeholder {
+    color: #a0aec0;
+    font-weight: 500;
+    opacity: 1;
+}
+
+.search-bar .search-btn,
+#Button1 {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--primary, #4078fa);
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 7px 10px 7px 10px;
+    margin-right: 92px;
+    margin-left:150px;
+    transition: background 0.16s;
+    box-shadow: none;
+    position: relative;
+}
+
+.search-bar .search-btn:hover,
+#Button1:hover {
+    background: #e7f0ff;
+    color: #1662c6;
+}
+
 
 </style>
    
@@ -759,8 +921,9 @@
                     <p><b>Battery:</b> <%# Eval("BatteryCapacity") %> mAh</p>
                     <p><b>OS:</b> <%# Eval("OS") %></p>
                      <asp:Button ID="cmd_view" runat="server" Text="View Details" CssClass="btn btn-main" CommandArgument='<%# Eval("Id") %>' CommandName="cmd_view" />
-                    <asp:Button ID="cmd_cart" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-main" />
-                </div>
+               <asp:Button ID="cmd_cart" runat="server" Text="Add To Cart" CommandName="cmd_cart" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-main" />
+
+                    </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
@@ -819,6 +982,16 @@
                             mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                         }
                     });
+                    function toggleDropdown() {
+                        const menu = document.getElementById('dropdownMenu');
+                        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    }
+
+                    document.addEventListener('click', function (e) {
+                        if (!e.target.closest('#userIcon')) {
+                            document.getElementById('dropdownMenu').style.display = 'none';
+                        }
+                    });
 
                     // Add to cart animation
                     const cartIcon = document.querySelector('.cart-icon');
@@ -864,10 +1037,16 @@
                                 </ul>
                             </div>
                           <div class="nav-right">
-   <div class="search-bar">
-    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search products..."></asp:TextBox>
-    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
-</div>
+    <asp:TextBox ID="TextBox1" runat="server" placeholder="Search mobiles..." />
+  <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn-main" OnClick="btnSearch_Click" />
+
+  <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+      <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
+      <div class="dropdown" id="dropdownMenu">
+          <a href="Forgot.aspx">Forgot Password</a>
+          <a href="login.aspx">Logout</a>
+      </div>
+  </div>
 
 <asp:Repeater ID="Repeater1" runat="server">
     <ItemTemplate>
@@ -879,21 +1058,16 @@
 </asp:Repeater>
 
 
-    <div class="auth-buttons">  
-        <a href="login.aspx" class="btn btn-register">Login</a> 
-        <a href="Register.aspx" class="btn btn-register">Register</a>
-    </div>
+ 
 
-    <div class="cart-icon">
-        <a href="contact.aspx">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">3</span>
-        </a>
-    </div>
+  
 </div>
 
         </header>
 
          
 </asp:Content>
+
+
+
 

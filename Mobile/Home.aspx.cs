@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,92 +8,101 @@ namespace Mobile
 {
     public partial class Home : System.Web.UI.Page
     {
-
-        string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-        SqlDataAdapter da;
-        SqlCommand cmd;
+        string s = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlConnection con;
+        SqlCommand cmd;
+        SqlDataAdapter da;
         DataSet ds;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Email"] == null)
             {
-                Response.Redirect("Register.aspx");
+                Response.Redirect("Login.aspx");
+                return;
             }
+
             if (!IsPostBack)
             {
-                BindProducts();
-                getcon();
+                BindProducts("");
             }
         }
+
         void getcon()
         {
-            SqlConnection con = new SqlConnection(constr);
+            con = new SqlConnection(s);
+            con.Open();
         }
-        private void BindProducts()
+
+        void BindProducts(string keyword)
         {
-            using (SqlConnection con = new SqlConnection(constr))
+            getcon();
+
+            string query;
+            if (keyword == "")
             {
-                getcon();
-                da = new SqlDataAdapter("SELECT * FROM Mobiles ORDER BY NEWID()", con);
-                ds = new DataSet();
-                da.Fill(ds);
-                rptProducts.DataSource = ds;
-                rptProducts.DataBind();
+                query = "SELECT * FROM Mobiles ORDER BY NEWID()";
             }
-        }
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-
-
-        protected void rptProducts_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "cmd_view")
+            else
             {
-                int id = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("ViewDetail.aspx?id=" + id);
-            }
-            else if (e.CommandName == "cmd_cart")
-            {
-
-                getcon();
-                SqlDataAdapter da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"] + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
-                int userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
-
-                int prodid = Convert.ToInt32(e.CommandArgument);
-                da = new SqlDataAdapter("select * from Mobiles where Id='" + prodid + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
-
-                string prodname = ds.Tables[0].Rows[0][2].ToString();
-                string prodprc = ds.Tables[0].Rows[0][4].ToString();
-                string img = ds.Tables[0].Rows[0][5].ToString();
-                int quantity = 1;
-
-                cmd = new SqlCommand("insert into Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) values ('" + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
-                cmd.ExecuteNonQuery();
-                Response.Redirect("Cart.aspx");
+                query = "SELECT * FROM Mobiles WHERE ModelName LIKE '%" + keyword + "%' OR Brand LIKE '%" + keyword + "%'";
             }
 
-        }
-        private void BindProducts(string keyword = "")
-        {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Mobiles ORDER BY NEWID()", con);
-            DataSet ds = new DataSet();
+            da = new SqlDataAdapter(query, con);
+            ds = new DataSet();
             da.Fill(ds);
+
             rptProducts.DataSource = ds;
             rptProducts.DataBind();
 
- 
-            
+            con.Close();
         }
 
-       
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = TextBox1.Text.Trim();
+            BindProducts(keyword);
+        }
 
+        protected void rptProducts_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+           
+                if (e.CommandName == "cmd_view")
+            {
+                Response.Redirect("ViewDetail.aspx?id=" + e.CommandArgument);
+            }
+            if (e.CommandName == "cmd_cart")
+
+            {
+                getcon();
+
+                cmd = new SqlCommand("SELECT Id FROM Register WHERE Email='" + Session["Email"].ToString() + "'", con);
+                object uidObj = cmd.ExecuteScalar();
+                if (uidObj == null)
+                {
+                  
+                    return;
+                }
+
+                int userId = Convert.ToInt32(uidObj);
+
+                cmd = new SqlCommand("SELECT * FROM Mobiles WHERE Id=" + e.CommandArgument, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    string prodName = dr["ModelName"].ToString();
+                    decimal prodPrice = Convert.ToDecimal(dr["Price"]);
+                    string img = dr["ImagePath"].ToString();
+                    dr.Close();
+                    cmd = new SqlCommand("INSERT INTO Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) " +
+                                         "VALUES(" + userId + "," + e.CommandArgument + ",'" + prodName + "'," + prodPrice + ",1,'" + img + "')", con);
+                    cmd.ExecuteNonQuery();
+
+                    Response.Redirect("Cart.aspx");
+                }
+
+                con.Close();
+            }
+        }
     }
 }

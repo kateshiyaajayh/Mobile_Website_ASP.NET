@@ -33,7 +33,8 @@
   }
 
   body {
-     
+        background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+                          
       color: var(--dark);
       min-height: 100vh;
       display: flex;
@@ -41,109 +42,212 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   }
+  /* User avatar circular badge */
+.user-icon {
+    width: 38px;
+    height: 38px;
+    background: #10989e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.17rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 1.5px 7px rgba(30,100,130,0.13);
+    transition: box-shadow 0.2s;
+    margin-left: 8px;
+    user-select: none;
+}
 
-  /* Header Styles */
-  header {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      padding: 15px 5%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-  }
+.user-icon:hover, .user-icon.active {
+    box-shadow: 0 6px 20px rgba(20,90,150,0.15);
+    background: #00767c;
+}
 
-  .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  }
+/* Custom dropdown menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 170px;
+    background: #fff;
+    padding: 0.65rem 0;
+    box-shadow: 0 7px 16px rgba(40,60,110,0.12);
+    border-radius: 12px;
+    z-index: 99;
+    text-align: left;
+}
 
-  .logo {
-      display: flex;
-      align-items: center;
-      font-size: 24px;
-      font-weight: 700;
-      margin-right: 30px;
-  }
+.user-icon:active .dropdown,
+.user-icon:focus-within .dropdown,
+.user-icon.open .dropdown {
+    display: block;
+}
 
-      .logo i {
-          margin-right: 10px;
-          color: var(--warning);
-      }
+/* Dropdown links */
+.dropdown a {
+    display: block;
+    color: #3a3a4c;
+    font-weight: 600;
+    padding: 9px 23px 9px 18px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 7px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown a:hover {
+    background: #e6f8ff;
+    color: #158cae;
+}
 
-  .nav-main {
-      display: flex;
-      align-items: center;
-      flex: 1;
-  }
+/* Smaller screens */
+@media (max-width: 650px) {
+    .user-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-left: 0;
+    }
+    .dropdown {
+        min-width: 120px;
+    }
+}
 
-  .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-      margin-right: auto;
-  }
+header {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 15px 5%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-      .nav-links li a {
-          color: white;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-      }
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-          .nav-links li a:hover {
-              color: var(--warning);
-          }
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 30px;
+}
+.logo i {
+    margin-right: 10px;
+    color: var(--warning);
+}
 
-  .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-  }
+.nav-main {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
 
-  .search-bar {
-      display: flex;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
-      padding: 8px 15px;
-      align-items: center;
-  }
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin-right: auto;
+}
 
-      .search-bar input {
-          background: transparent;
-          border: none;
-          color: white;
-          width: 180px;
-          outline: none;
-          padding: 0 10px;
-      }
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.nav-links li a:hover {
+    color: var(--warning);
+}
 
-          .search-bar input::placeholder {
-              color: rgba(255, 255, 255, 0.7);
-          }
+/* NAV RIGHT - User avatar and dropdown */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-  .auth-buttons {
-      display: flex;
-      gap: 10px;
-  }
+.user-icon {
+    width: 38px;
+    height: 38px;
+    background: #10989e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.17rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 1.5px 7px rgba(30,100,130,0.13);
+    transition: box-shadow 0.2s;
+    margin-left: 8px;
+    user-select: none;
+}
+.user-icon:hover, .user-icon.active {
+    box-shadow: 0 6px 20px rgba(20,90,150,0.15);
+    background: #00767c;
+}
 
-  .btn {
-      padding: 8px 16px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s ease;
-  }
+/* Dropdown menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 170px;
+    background: #fff;
+    padding: 0.65rem 0;
+    box-shadow: 0 7px 16px rgba(40,60,110,0.12);
+    border-radius: 12px;
+    z-index: 99;
+    text-align: left;
+}
+.user-icon:active .dropdown,
+.user-icon:focus-within .dropdown,
+.user-icon.open .dropdown {
+    display: block;
+}
+.dropdown a {
+    display: block;
+    color: #3a3a4c;
+    font-weight: 600;
+    padding: 9px 23px 9px 18px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 7px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown a:hover {
+    background: #e6f8ff;
+    color: #158cae;
+}
 
-  .btn-login {
-      background: white;
-      color: var(--primary);
-  }
+/* Responsive */
+@media (max-width: 650px) {
+    .user-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-left: 0;
+    }
+    .dropdown {
+        min-width: 120px;
+    }
+}
+
 
   .btn-register {
       background: var(--secondary);
@@ -333,72 +437,46 @@
                 cursor: pointer;
             }
 
-            @media (max-width: 768px) {
-                .mobile-menu-btn {
-                    display: block;
-                }
-
-                .nav-links {
-                    display: none;
-                    flex-direction: column;
-                    width: 100%;
-                    text-align: center;
-                    gap: 15px;
-                    padding: 15px 0;
-                }
-
-                    .nav-links.active {
-                        display: flex;
-                    }
-            }
+          
         </style>
     </head>
 </asp:Content>
 <asp:Content ID="Content6" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <body>
         <!-- Header -->
-        <header>
-            <div class="natainer">
-                <div class="nav-main">
-                    <div class="logo">
-                        <i class="fas fa-mobile-alt"></i><span>Mobile Junction</span>
-                    </div>
-                    <button class="mobile-menu-btn">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <ul class="nav-links">
-                        <li><a href="home.aspx"><i class="fas fa-home"></i>Home</a></li>
-                        <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
-                        <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
-                        <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
-                        <li><a href="wishlist.aspx"><i class="fa-solid fa-heart"></i>wishlist</a></li>
-
-                        <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
-                    </ul>
+      <header>
+    <div class="nav-container">
+        <div class="nav-main">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i><span>Mobile Junction</span>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="home.aspx"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="about.aspx"><i class="fas fa-info-circle"></i>About</a></li>
+                <li><a href="shop.aspx"><i class="fas fa-store"></i>Shop</a></li>
+                <li><a href="cart.aspx"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+                <li><a href="wishlist.aspx"><i class="fa-solid fa-heart"></i>wishlist</a></li>
+                <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+                <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
+                <div class="dropdown" id="dropdownMenu">
+                    <a href="Forgot.aspx">Forgot Password</a>
+                    <a href="login.aspx">Logout</a>
                 </div>
-                <div class="nav-right">
-                    <div class="search-bar">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search products...">
-                    </div>
-                    <div class="auth-buttons">
-                        <a href="login.aspx" class="btn btn-register">Login</a> <a href="Register.aspx" class="btn btn-register">Register</a>
-                    </div>
-                    <div class="cart-icon">
-                        <a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
-                    </div>
-                </div>
-        </header>
+            </div>
+        </div>
+    </div>
+</header>
 
         <!-- Main Content -->
                  <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #141E30, #243B55);
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
+      
         .container {
             width: 90%;
             margin: 40px auto;

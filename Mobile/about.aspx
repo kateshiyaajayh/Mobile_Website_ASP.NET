@@ -32,7 +32,8 @@
 
                      
                          body {
-     background-color: #f5f7fb;
+                              background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+
      color: var(--dark);
      min-height: 100vh;
      display: flex;
@@ -387,8 +388,9 @@
       
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80');
-            background-size: cover;
+                                        background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+
+           background-size: cover;
             background-position: center;
             min-height: 100vh;
             display: flex;
@@ -403,8 +405,9 @@
         .hero-content {
             max-width: 800px;
             padding: 3rem;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 16px;
+           
+                                        background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+border-radius: 16px;
             backdrop-filter: blur(10px);
             animation: fadeIn 1s ease-out;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
@@ -595,7 +598,82 @@
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
+    }/* User avatar circular badge */
+.user-icon {
+    width: 38px;
+    height: 38px;
+    background: #10989e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.17rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 1.5px 7px rgba(30,100,130,0.13);
+    transition: box-shadow 0.2s;
+    margin-left: 8px;
+    user-select: none;
+}
+
+.user-icon:hover, .user-icon.active {
+    box-shadow: 0 6px 20px rgba(20,90,150,0.15);
+    background: #00767c;
+}
+
+/* Custom dropdown menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 170px;
+    background: #fff;
+    padding: 0.65rem 0;
+    box-shadow: 0 7px 16px rgba(40,60,110,0.12);
+    border-radius: 12px;
+    z-index: 99;
+    text-align: left;
+}
+
+.user-icon:active .dropdown,
+.user-icon:focus-within .dropdown,
+.user-icon.open .dropdown {
+    display: block;
+}
+
+/* Dropdown links */
+.dropdown a {
+    display: block;
+    color: #3a3a4c;
+    font-weight: 600;
+    padding: 9px 23px 9px 18px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 7px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown a:hover {
+    background: #e6f8ff;
+    color: #158cae;
+}
+
+/* Smaller screens */
+@media (max-width: 650px) {
+    .user-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-left: 0;
     }
+    .dropdown {
+        min-width: 120px;
+    }
+}
+
+
                     </style>
                 </head>
 </asp:Content>
@@ -708,59 +786,396 @@
                                     <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>
                             </div>
-                                                      <div class="nav-right">
-    <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search products...">
-    </div>
+                                                                             <div class="nav-right">
+    <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+      <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
+      <div class="dropdown" id="dropdownMenu">
+          <a href="Forgot.aspx">Forgot Password</a>
+          <a href="login.aspx">Logout</a>
+      </div>
+  </div>
 
-    <div class="auth-buttons">  
-        <a href="login.aspx" class="btn btn-register">Login</a> 
-        <a href="Register.aspx" class="btn btn-register">Register</a>
-    </div>
-
-    <div class="cart-icon">
-        <a href="contact.aspx">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">3</span>
-        </a>
-    </div>
-</div>
 
                         </div>
     </header>
-            <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>About Mobile Junction</h1>
-            <p>Welcome to Mobile Junction, your premier destination for the latest smartphones, accessories, and tech gadgets. Since 2010, we've been connecting people with technology that enhances their lives, offering top brands at competitive prices with exceptional customer service.</p>
-            <div class="cta-buttons">
-                <a href="shop.aspx" class="btn btn-primary">Shop Now</a>
-<a href="learn.aspx" class="btn btn-secondary">Learn More</a>
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Mobile Junction</title>
 
-            </div>
-        </div>
-    </section>
+<style>
+/* ===== GLOBAL ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stat-item">
-            <span class="stat-number">500K+</span>
-            <span class="stat-label">Happy Customers</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">13+</span>
-            <span class="stat-label">Years Experience</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">75+</span>
-            <span class="stat-label">Brands Available</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">1M+</span>
-            <span class="stat-label">Products Sold</span>
-        </div>
-    </section>
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+ 
+                              background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+
+  color: #333;
+}
+
+section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 10%;
+}
+
+/* ===== SECTION 1 ===== */
+.section1 {
+             
+}
+
+.section1 .content {
+  flex: 1 1 450px;
+  text-align: center;
+}
+
+.section1 h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color:#00bcd4;
+}
+
+.section1 p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.section1 button {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.section1 button:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.section1 .image {
+  flex: 1 1 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section1 .image img {
+  max-width: 150px;
+  width: 150px;
+  transition: transform 0.5s ease;
+}
+
+.section1 .image img:hover {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* ===== SECTION 2 ===== */
+.section2 {
+                  
+  color: #222;
+  gap: 50px;
+}
+
+/* Cube container */
+.cube-container {
+  perspective: 800px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cube */
+.cube {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: cubeRotate360 8s infinite linear;
+}
+
+/* Smooth continuous 360 rotation */
+@keyframes cubeRotate360 {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cube div {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cube div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cube faces */
+.front { transform: translateZ(100px); }
+.back { transform: rotateY(180deg) translateZ(100px); }
+.right { transform: rotateY(90deg) translateZ(100px); }
+.left { transform: rotateY(-90deg) translateZ(100px); }
+.top { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Section text */
+.section2 .text {
+  flex: 1 1 400px;
+  text-align: center;
+}
+
+.section2 h2 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.section2 p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.section2 button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.section2 button:hover {
+  background: #00c6ff;
+  transform: scale(1.05);
+}
+
+/* ===== SECTION 3 ===== */
+.section3 {
+                         color: white;
+  flex-direction: column;
+  text-align: center;
+}
+
+.section3 h2 {
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+}
+
+.review-container {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.review {
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 30px;
+  width: 300px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.review:hover {
+  transform: translateY(-10px);
+}
+
+.review img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #fff;
+}
+
+.review p {
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.review h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 900px) {
+  section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .section1 h1 { font-size: 2.2rem; }
+}
+.section1 .image img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+                             background: linear-gradient(to bottom, #FFFFFF, color-mix(in srgb, #FFFFFF 50%, #0000FF 50%), #0000FF);
+
+  box-shadow: 
+      -10px -10px 20px rgba(255, 255, 255, 0.6),   /* top-left light */
+      15px 15px 30px rgba(0, 0, 0, 0.3);          /* bottom-right deep shadow */
+  transition: all 0.4s ease;
+  transform: perspective(800px) rotateY(-5deg) rotateX(3deg);
+}
+
+.section1 .image img:hover {
+  transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.05);
+  box-shadow:
+      -5px -5px 15px rgba(255, 255, 255, 0.7),
+      20px 20px 40px rgba(0, 0, 0, 0.4);
+}
+/* Cube container */
+.cube-container {
+  perspective: 1000px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cube (static, no rotation) */
+.cube {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  transform: rotateY(-15deg) rotateX(10deg);
+  transition: all 0.6s ease;
+}
+
+/* Cube faces */
+.cube div {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+      -10px -10px 25px rgba(255, 255, 255, 0.8),  /* top-left light */
+      20px 20px 40px rgba(0, 0, 0, 0.4);           /* bottom-right depth */
+  transition: all 0.4s ease;
+}
+
+/* Image inside cube faces */
+.cube div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* Hover glow effect */
+.cube:hover {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+}
+
+.cube:hover div {
+  box-shadow:
+      -5px -5px 20px rgba(255, 255, 255, 0.9),
+      25px 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Cube sides */
+.front { transform: translateZ(100px); }
+.back { transform: rotateY(180deg) translateZ(100px); }
+.right { transform: rotateY(90deg) translateZ(100px); }
+.left { transform: rotateY(-90deg) translateZ(100px); }
+.top { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+
+</style>
+</head>
+<body>
+
+<!-- ===== SECTION 1 ===== -->
+<section class="section1">
+  <div class="content">
+    <h1>Welcome to Mobile Junction</h1>
+    <p>Your trusted destination for the latest smartphones and accessories.</p>
+    <button>Shop Now</button>
+  </div>
+  <div class="image">
+  <img src="images/Home_add.png" alt="Front"> 
+  </div>
+</section>
+
+<!-- ===== SECTION 2 ===== -->
+<section class="section2">
+  <div class="cube-container">
+    <div class="cube">
+      <div class="front"><img src="images/Home_add.png" alt="Front"></div>
+      <div class="back"><img src="images/SAMSUNG_S25_ULTRA.png" alt="Back"> </div>
+      <div class="right"><img src="images/Samsung Galaxy Z Flip7.png" alt="Right"></div>
+      <div class="left"><img src="images/oppo.png" alt="Left"></div>
+      <div class="top"><img src="images/Home_add.png" alt="Front"></div>
+      <div class="bottom"><img src="images/oppo.png" alt="Left"></div>
+    </div>
+  </div>
+
+  <div class="text">
+    <h2>Discover Quality & Innovation</h2>
+    <p>At Mobile Junction, we bring you the most advanced mobile technology at unbeatable prices. Experience cutting-edge performance, stylish designs, and unmatched support all in one place.</p>
+    <button>Shop Now</button>
+  </div>
+</section>
+
+<!-- ===== SECTION 3 ===== -->
+<section class="section3">
+  <h2>What Our Customers Say</h2>
+  <div class="review-container">
+    <div class="review">
+      <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="">
+      <p>“Amazing service and the best prices. Got my new phone in just 2 days!”</p>
+      <h4>Rohit Sharma</h4>
+    </div>
+    <div class="review">
+      <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="">
+      <p>“Fantastic experience! The team was helpful and knowledgeable.”</p>
+      <h4>Pooja Patel</h4>
+    </div>
+    <div class="review">
+      <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="">
+      <p>“High-quality products and super fast delivery. Highly recommended.”</p>
+      <h4>Arjun Mehta</h4>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
 
 </asp:Content>
 

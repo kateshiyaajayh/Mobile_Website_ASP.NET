@@ -354,6 +354,81 @@
                                 justify-content: center;
                             }
                         }
+                        /* User avatar circular badge */
+.user-icon {
+    width: 38px;
+    height: 38px;
+    background: #10989e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.17rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 1.5px 7px rgba(30,100,130,0.13);
+    transition: box-shadow 0.2s;
+    margin-left: 8px;
+    user-select: none;
+}
+
+.user-icon:hover, .user-icon.active {
+    box-shadow: 0 6px 20px rgba(20,90,150,0.15);
+    background: #00767c;
+}
+
+/* Custom dropdown menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 170px;
+    background: #fff;
+    padding: 0.65rem 0;
+    box-shadow: 0 7px 16px rgba(40,60,110,0.12);
+    border-radius: 12px;
+    z-index: 99;
+    text-align: left;
+}
+
+.user-icon:active .dropdown,
+.user-icon:focus-within .dropdown,
+.user-icon.open .dropdown {
+    display: block;
+}
+
+/* Dropdown links */
+.dropdown a {
+    display: block;
+    color: #3a3a4c;
+    font-weight: 600;
+    padding: 9px 23px 9px 18px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 7px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown a:hover {
+    background: #e6f8ff;
+    color: #158cae;
+}
+
+/* Smaller screens */
+@media (max-width: 650px) {
+    .user-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-left: 0;
+    }
+    .dropdown {
+        min-width: 120px;
+    }
+}
+
 
                         /* Mobile Menu */
                         .mobile-menu-btn {
@@ -387,6 +462,9 @@
         th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
         th { background: #3498db; color: white; }
         h2 { text-align: center; font-family: Arial; margin: 20px; }
+        .center{
+            margin-left:180px;
+        }
                     </style>
                 </head>
 </asp:Content>
@@ -412,18 +490,15 @@
                                     <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>
                             </div>
-                            <div class="nav-right">
-                                <div class="search-bar">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" placeholder="Search products...">
-                                </div>
-                                <div class="auth-buttons">
-                                    <a href="login.aspx" class="btn btn-register">Login</a> <a href="Register.aspx" class="btn btn-register">Register</a>
-                                </div>
-                                <div class="cart-icon">
-                                    <a href="contact.aspx"><i class="fas fa-shopping-cart"></i><span class="cart-count">3</span> </a>
-                                </div>
-                            </div>
+                                                                                                                  <div class="nav-right">
+<div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+  <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
+  <div class="dropdown" id="dropdownMenu">
+      <a href="Forgot.aspx">Forgot Password</a>
+      <a href="login.aspx">Logout</a>
+  </div>
+    </div>
+                                                                                                                      </div>
         </header>
 
 
@@ -456,14 +531,20 @@
                 <asp:LinkButton ID="lnkRemove" runat="server" CommandName="Remove" 
                     CommandArgument='<%# Eval("Prod_Cart_Id") %>'
                     Text="Remove" OnClientClick="return confirm('Remove this item?');" OnClick="lnkRemove_Click" />
-            </ItemTemplate>
-        </asp:TemplateField>
-    </Columns>
-</asp:GridView>
-        <asp:Label ID="lblFinalTotal" runat="server" Text="Label"></asp:Label>
-        <asp:Button ID="Button1" runat="server" Text="Update" OnClick="Button1_Click" />
-        <asp:Button ID="btnCheckout" runat="server" Text="Proceed to Checkout" OnClick="btnCheckout_Click" CssClass="btn btn-primary" />
 
+            </ItemTemplate>
+
+        </asp:TemplateField>
+
+    </Columns>
+
+</asp:GridView>
+   <div class="center">
+         <asp:Label ID="lblFinalTotal" runat="server" Text="Label"></asp:Label>
+ <asp:Button ID="Button1" runat="server" Text="Update" OnClick="Button1_Click" CssClass="btn btn-primary" />
+ <asp:Button ID="btnCheckout" runat="server" Text="Proceed to Checkout" OnClick="btnCheckout_Click" CssClass="btn btn-primary" />
+
+       </div>
   
 
                 <!-- Footer -->

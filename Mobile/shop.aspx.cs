@@ -13,6 +13,7 @@ namespace Mobile
         SqlConnection con;
         DataSet ds;
         SqlCommand cmd;
+        IDataAdapter da;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,6 +25,10 @@ namespace Mobile
             {
                 fill();
             }
+            if (!IsPostBack)
+            {
+                BindProducts("");
+            }
         }
 
         void getcon()
@@ -31,7 +36,35 @@ namespace Mobile
             con = new SqlConnection(s);
             con.Open();
         }
+        void BindProducts(string keyword)
+        {
+            getcon();
 
+            string query;
+            if (keyword == "")
+            {
+                query = "SELECT * FROM Mobiles ORDER BY NEWID()";
+            }
+            else
+            {
+                query = "SELECT * FROM Mobiles WHERE ModelName LIKE '%" + keyword + "%' OR Brand LIKE '%" + keyword + "%'";
+            }
+
+            da = new SqlDataAdapter(query, con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            rptMobiles.DataSource = ds;
+            rptMobiles.DataBind();
+
+            con.Close();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = TextBox1.Text.Trim();
+            BindProducts(keyword);
+        }
         private void fill()
         {
             getcon();
