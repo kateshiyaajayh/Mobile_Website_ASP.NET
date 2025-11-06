@@ -101,7 +101,7 @@ namespace Mobile
                     Response.Redirect("Cart.aspx");
                 }
 
-                con.Close();
+              
             }
         }
     }

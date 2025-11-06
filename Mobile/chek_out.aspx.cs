@@ -32,7 +32,7 @@ namespace Mobile
             con = new SqlConnection(s);
             con.Open();
         }
-
+       
         void BindCheckout()
         {
             getcon();
@@ -54,14 +54,13 @@ namespace Mobile
                     totalAmount += Convert.ToDecimal(dr["Subtotal"]);
                 }
                 lblTotal.Text = "Total Amount: ₹ " + totalAmount.ToString("0.00");
-                ViewState["TotalAmount"] = totalAmount;  // Store for postback
+                ViewState["TotalAmount"] = totalAmount;  
             }
-            con.Close();
+           
         }
 
         protected void rblPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Always get current total from ViewState
             decimal amount = (ViewState["TotalAmount"] != null) ? Convert.ToDecimal(ViewState["TotalAmount"]) : 0;
 
             pnlCreditCard.Visible = (rblPaymentMethod.SelectedValue == "CreditCard");
@@ -92,11 +91,9 @@ namespace Mobile
             lblMessage.Text = "";
             lblSuccess.Text = "";
 
-            // Get total from ViewState every time
             decimal amount = (ViewState["TotalAmount"] != null) ? Convert.ToDecimal(ViewState["TotalAmount"]) : 0;
             string payMethod = rblPaymentMethod.SelectedValue;
 
-            // Validation
             if (payMethod == "CreditCard")
             {
                 if (string.IsNullOrWhiteSpace(txtCardName.Text) || string.IsNullOrWhiteSpace(txtCardNumber.Text) ||
@@ -139,7 +136,7 @@ namespace Mobile
                     cmd = new SqlCommand("SELECT MAX(OrderID) FROM Orders", con);
                     int orderId = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Quantity, Prod_Price FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
+                    da = new SqlDataAdapter("SELECT Prod_Cart_Id, Prod_Quantity, Prod_Price FROM Cart WHERE User_Cart_Id=" + uid, con);
                     DataSet cartds = new DataSet();
                     da.Fill(cartds);
 
@@ -179,7 +176,7 @@ namespace Mobile
                         cmd.ExecuteNonQuery();
                     }
 
-                    cmd = new SqlCommand("DELETE FROM Cart_tbl WHERE User_Cart_Id=" + uid, con);
+                    cmd = new SqlCommand("DELETE FROM Cart WHERE User_Cart_Id=" + uid, con);
                     cmd.ExecuteNonQuery();
                     lblSuccess.Text = "Order placed successfully!";
                     Response.Redirect("OrderSuccess.aspx");

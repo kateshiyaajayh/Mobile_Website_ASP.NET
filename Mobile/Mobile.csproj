@@ -79,7 +79,6 @@
     <Content Include="contact.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Home.aspx" />
-    <Content Include="Logout.aspx" />
     <Content Include="Orders.aspx" />
     <Content Include="OrderSuccess.aspx" />
     <Content Include="Products.aspx" />
@@ -156,13 +155,6 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Logout.aspx.cs">
-      <DependentUpon>Logout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Logout.aspx.designer.cs">
-      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Orders.aspx.cs">
       <DependentUpon>Orders.aspx</DependentUpon>

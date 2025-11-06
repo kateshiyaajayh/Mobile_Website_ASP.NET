@@ -18,7 +18,49 @@
         input[type=text], input[type=number] { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
         .success-message { color: green; font-weight: 600; margin-top: 15px; }
         .error-message { color: #d90429; font-weight: 600; margin-top: 15px; }
-    </style>
+     .form-container {
+         margin-left:150px;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width:1210px;
+        }
+        h2 {
+            text-align: left;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width:1220px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .success {
+            color: green;
+            text-align: center;
+        }
+        </style>
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
@@ -32,7 +74,32 @@
             </Columns>
         </asp:GridView>
         <asp:Label ID="lblTotal" runat="server" Text=""></asp:Label>
+                 <div id="form2" runat="server">
+    <div class="form-container">
+        <h2>Address Form</h2>
 
+        <asp:Label ID="Label1" runat="server" Text="Full Name"></asp:Label>
+        <asp:TextBox ID="txtFullName" runat="server" placeholder="Enter your name" required></asp:TextBox>
+
+        <asp:Label ID="Label2" runat="server" Text="Phone Number"></asp:Label>
+        <asp:TextBox ID="txtPhone" runat="server" placeholder="Enter phone number" required></asp:TextBox>
+
+        <asp:Label ID="Label3" runat="server" Text="Address"></asp:Label>
+        <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="3" placeholder="Enter your full address" required></asp:TextBox>
+
+        <asp:Label ID="Label4" runat="server" Text="State"></asp:Label>
+        <asp:TextBox ID="txtState" runat="server" placeholder="Enter state" required></asp:TextBox>
+
+        <asp:Label ID="Label5" runat="server" Text="City"></asp:Label>
+        <asp:TextBox ID="txtCity" runat="server" placeholder="Enter city" required></asp:TextBox>
+
+        <asp:Label ID="Label6" runat="server" Text="Pincode"></asp:Label>
+        <asp:TextBox ID="txtPincode" runat="server" placeholder="Enter pincode" required></asp:TextBox>
+
+         <br /><br />
+        <asp:Label ID="Label7" runat="server" CssClass="success"></asp:Label>
+    </div>
+</div>
         <div class="payment-container">
             <h2>Payment Method</h2>
             <div class="form-group">
@@ -46,6 +113,7 @@
             </div>
 
             <!-- COD Summary Panel -->
+          
             <asp:Panel ID="pnlCODSummary" runat="server" Visible="false">
                 <div class="form-group">
                     <label><b>MRP:</b> <asp:Label ID="lblCODMRP" runat="server" /></label><br />

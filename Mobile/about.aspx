@@ -879,6 +879,7 @@ section {
 }
 
 .section1 .image img {
+    border-radius:20px;
   max-width: 150px;
   width: 150px;
   transition: transform 0.5s ease;
@@ -1113,6 +1114,29 @@ section {
 .left { transform: rotateY(-90deg) translateZ(100px); }
 .top { transform: rotateX(90deg) translateZ(100px); }
 .bottom { transform: rotateX(-90deg) translateZ(100px); }
+.section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  background: #f5f5f5;
+}
+
+.section1 .content {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.section1 .image {
+  flex: 1;
+}
+
+.section1 video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+}
 
 
 </style>
@@ -1126,8 +1150,12 @@ section {
     <p>Your trusted destination for the latest smartphones and accessories.</p>
     <button>Shop Now</button>
   </div>
+
   <div class="image">
-  <img src="images/Home_add.png" alt="Front"> 
+    <video autoplay muted loop playsinline>
+      <source src="product_images/video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 </section>
 

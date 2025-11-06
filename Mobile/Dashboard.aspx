@@ -130,6 +130,66 @@
             color: #ecf0f1;
             border-radius: 8px;
         }
+       
+/* Container */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Header Row */
+.table th {
+    background-color: #007BFF;
+    color: white;
+    text-align: left;
+    padding: 12px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* Data Rows */
+.table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+/* Alternate Row Color */
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover Effect */
+.table tr:hover {
+    background-color: #f1f5ff;
+    transition: 0.3s;
+}
+
+/* Edit/Delete Buttons */
+.table a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.table a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Header Text */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
     </style>
 </asp:Content>
 
@@ -155,8 +215,9 @@
                     <li><a href="Orders.aspx"><i class="fas fa-shopping-cart"></i><span class="menu-text">Orders</span></a></li>
                     <li><a href="Reports.aspx"><i class="fas fa-chart-bar"></i><span class="menu-text">Reports</span></a></li>
                     <li><a href="Settings.aspx"><i class="fas fa-cog"></i><span class="menu-text">Settings</span></a></li>
-                    <li><a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i><span class="menu-text">Logout</span></a></li>
-                </ul>
+                     <li><a href="adminLogin.aspx"><i class="fas fa-sign-out-alt"></i><span class="menu-text">Logout</span></a></li>
+                               
+                    </ul>
             </div>
         </div>
 

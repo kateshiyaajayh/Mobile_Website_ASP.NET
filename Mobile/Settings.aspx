@@ -361,11 +361,12 @@
                                     <li><a href="Dashboard.aspx" class="active"><i class="fas fa-home"></i><span class="menu-text">Dashboard</span></a></li>
                                     <li><a href="User.aspx"><i class="fas fa-users"></i><span class="menu-text">Users</span></a></li>
                                     <li><a href="Products.aspx"><i class="fas fa-box"></i><span class="menu-text">Products</span></a></li>
-                                    <li><a href="Order.aspx"><i class="fas fa-shopping-cart"></i><span class="menu-text">Orders</span></a></li>
+                                    <li><a href="Orders.aspx"><i class="fas fa-shopping-cart"></i><span class="menu-text">Orders</span></a></li>
                                     <li><a href="Reports.aspx"><i class="fas fa-chart-bar"></i><span class="menu-text">Reports</span></a></li>
                                     <li><a href="Settings.aspx"><i class="fas fa-cog"></i><span class="menu-text">Settings</span></a></li>
-                                    <li><a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i><span class="menu-text">Logout</span></a></li>
-                                </ul>
+                                   <li><a href="adminLogin.aspx"><i class="fas fa-sign-out-alt"></i><span class="menu-text">Logout</span></a></li>
+                               
+                                    </ul>
                             </div>
             </div>
 
@@ -377,7 +378,7 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 600px;
+            width:120%;
         }
         .settings-container h2 {
             margin-bottom: 20px;
