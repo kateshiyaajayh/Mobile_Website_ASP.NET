@@ -1040,13 +1040,24 @@ header {
     <asp:TextBox ID="TextBox1" runat="server" placeholder="Search mobiles..." />
   <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn-main" OnClick="btnSearch_Click" />
 
-  <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
-      <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
-      <div class="dropdown" id="dropdownMenu">
-          <a href="Forgot.aspx">Forgot Password</a>
-          <a href="login.aspx">Logout</a>
-      </div>
-  </div>
+<div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+    <% 
+        if (Session["Email"] != null) 
+        { 
+            Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); 
+        } 
+    %>
+    <div class="dropdown" id="dropdownMenu">
+        <% if (Session["Email"] != null) { %>
+            <a href="#">Welcome <%= Session["Email"].ToString() %></a>
+        <% } else { %>
+            <a href="#">Welcome Guest</a>
+        <% } %>
+        <a href="Forgot.aspx">Forgot Password</a>
+        <a href="login.aspx">Logout</a>
+    </div>
+</div>
+
 
 <asp:Repeater ID="Repeater1" runat="server">
     <ItemTemplate>

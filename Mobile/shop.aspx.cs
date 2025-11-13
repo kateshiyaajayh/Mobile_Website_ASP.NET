@@ -86,32 +86,37 @@ namespace Mobile
         {
             if (e.CommandName == "cmd_view")
             {
-                int id = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("ViewDetail.aspx?id=" + id);
+                Response.Redirect("ViewDetail.aspx?id=" + e.CommandArgument);
             }
-            else if (e.CommandName == "cmd_cart")
+            if (e.CommandName == "cmd_cart")
+
             {
                 getcon();
 
-                SqlDataAdapter da = new SqlDataAdapter("select * from Register where Email='" + Session["Email"].ToString() + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
-                int userid = Convert.ToInt32(ds.Tables[0].Rows[0]["Id"].ToString());
+                cmd = new SqlCommand("SELECT Id FROM Register WHERE Email='" + Session["Email"].ToString() + "'", con);
+                object uidObj = cmd.ExecuteScalar();
+                if (uidObj == null)
+                {
 
-                int prodid = Convert.ToInt32(e.CommandArgument);
-                da = new SqlDataAdapter("select * from Mobiles where Id='" + prodid + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
+                    return;
+                }
 
-                string prodname = ds.Tables[0].Rows[0]["ModelName"].ToString();
-                string prodprc = ds.Tables[0].Rows[0]["Price"].ToString();
-                string img = ds.Tables[0].Rows[0]["ImagePath"].ToString();  
-                int quantity = 1;
+                int userId = Convert.ToInt32(uidObj);
 
-                cmd = new SqlCommand("insert into Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) values ('"
-                    + userid + "','" + prodid + "','" + prodname + "','" + prodprc + "','" + quantity + "','" + img + "')", con);
-                cmd.ExecuteNonQuery();
-                Response.Redirect("Cart.aspx");
+                cmd = new SqlCommand("SELECT * FROM Mobiles WHERE Id=" + e.CommandArgument, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    string prodName = dr["ModelName"].ToString();
+                    decimal prodPrice = Convert.ToDecimal(dr["Price"]);
+                    string img = dr["ImagePath"].ToString();
+                    dr.Close();
+                    cmd = new SqlCommand("INSERT INTO Cart_tbl(User_Cart_Id, Prod_Cart_Id, Prod_Name, Prod_Price, Prod_Quantity, img) " +
+                                         "VALUES(" + userId + "," + e.CommandArgument + ",'" + prodName + "'," + prodPrice + ",1,'" + img + "')", con);
+                    cmd.ExecuteNonQuery();
+
+                    Response.Redirect("Cart.aspx");
+                }
             }
             else if (e.CommandName == "cmd_wish")
             {

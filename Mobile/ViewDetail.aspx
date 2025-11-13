@@ -629,14 +629,24 @@
                         <li><a href="Contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                     </ul>
                 </div>
-                                                                                                                               <div class="nav-right">
-<div class="user-icon" id="userIcon" onclick="toggleDropdown()">
-  <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
-  <div class="dropdown" id="dropdownMenu">
-      <a href="Forgot.aspx">Forgot Password</a>
-      <a href="login.aspx">Logout</a>
-  </div>
+                 <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+    <% 
+        if (Session["Email"] != null) 
+        { 
+            Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); 
+        } 
+    %>
+    <div class="dropdown" id="dropdownMenu">
+        <% if (Session["Email"] != null) { %>
+            <a href="#">Welcome <%= Session["Email"].ToString() %></a>
+        <% } else { %>
+            <a href="#">Welcome Guest</a>
+        <% } %>
+        <a href="Forgot.aspx">Forgot Password</a>
+        <a href="login.aspx">Logout</a>
     </div>
+</div>
+
         </header>
         <center>
 
@@ -700,6 +710,45 @@
                     </div>
                 </ItemTemplate>
             </asp:DataList>
+            <style>
+.datalist-item {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    display: flex;
+    gap: 30px; /* Uniform spacing between image-label groups */
+    padding: 25px;
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+    animation: fadeInUp 0.6s ease forwards;
+    justify-content: space-between; /* Spread groups evenly */
+}
+
+.image-label-group {
+    flex: 1 1 160px; /* Fixed width for consistent size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 160px; /* Ensure consistent width */
+}
+
+.image-label-group img {
+    width: 160px;  /* Fixed size images */
+    height: 160px;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 5px 20px rgba(30, 100, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.image-label-group img:hover {
+    transform: scale(1.12);
+    box-shadow: 0 12px 36px rgba(30, 100, 255, 0.35);
+}
+
+
+
+            </style>
 </asp:Content>
 <asp:Content ID="Content7" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
     <!-- Footer -->

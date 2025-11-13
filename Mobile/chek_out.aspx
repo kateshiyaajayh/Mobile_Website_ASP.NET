@@ -64,7 +64,9 @@
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
-        <h2>Checkout</h2>
+        <center>
+        Checkout
+            </center>
         <asp:GridView ID="GridViewCheckout" runat="server" AutoGenerateColumns="False">
             <Columns>
                 <asp:BoundField DataField="Prod_Name" HeaderText="Product" />

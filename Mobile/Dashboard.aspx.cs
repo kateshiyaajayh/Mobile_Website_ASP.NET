@@ -60,20 +60,7 @@ namespace Mobile
             string paymentDate = ((TextBox)row.Cells[7].Controls[0]).Text;
 
             getcon();
-            SqlCommand cmd = new SqlCommand(
-                "UPDATE PaymentDetails SET OrderID=" + orderId +
-                ", UserID=" + userId +
-                ", PaymentMethod='" + paymentMethod +
-                "', TransactionID='" + transactionId +
-                "', Amount=" + amount +
-                ", PaymentStatus='" + paymentStatus +
-                "', PaymentDate='" + paymentDate +
-                "' WHERE PaymentID=" + paymentId, con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            GridViewPaymentDetails.EditIndex = -1;
-            BindPaymentDetails();
+         
         }
 
         protected void GridViewPaymentDetails_RowDeleting(object sender, GridViewDeleteEventArgs e)

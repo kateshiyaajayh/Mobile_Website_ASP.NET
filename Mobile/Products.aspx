@@ -610,6 +610,7 @@
                             <asp:ListItem>Oppo</asp:ListItem>
                             <asp:ListItem>Vivo</asp:ListItem>
                             <asp:ListItem>Oneplus</asp:ListItem>
+                            <asp:ListItem>Poco</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>

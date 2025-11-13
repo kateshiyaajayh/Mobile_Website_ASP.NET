@@ -490,14 +490,24 @@
                                     <li><a href="contact.aspx"><i class="fas fa-phone"></i>Contact</a></li>
                                 </ul>
                             </div>
-                                                                                                                  <div class="nav-right">
-<div class="user-icon" id="userIcon" onclick="toggleDropdown()">
-  <% if (Session["Email"] != null) { Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); } %>
-  <div class="dropdown" id="dropdownMenu">
-      <a href="Forgot.aspx">Forgot Password</a>
-      <a href="login.aspx">Logout</a>
-  </div>
+                    <div class="user-icon" id="userIcon" onclick="toggleDropdown()">
+    <% 
+        if (Session["Email"] != null) 
+        { 
+            Response.Write(Session["Email"].ToString()[0].ToString().ToUpper()); 
+        } 
+    %>
+    <div class="dropdown" id="dropdownMenu">
+        <% if (Session["Email"] != null) { %>
+            <a href="#">Welcome <%= Session["Email"].ToString() %></a>
+        <% } else { %>
+            <a href="#">Welcome Guest</a>
+        <% } %>
+        <a href="Forgot.aspx">Forgot Password</a>
+        <a href="login.aspx">Logout</a>
     </div>
+</div>
+
                                                                                                                       </div>
         </header>
 
